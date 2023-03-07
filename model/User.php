@@ -9,6 +9,8 @@ class User
     private $type;
     private $state;
 
+    private $password;
+
     public function __construct()
     {
     }
@@ -20,8 +22,9 @@ class User
      * @param $no
      * @param $type
      * @param $state
+     * @param $password
      */
-    public function __construct_1($userId, $name, $email, $no, $type, $state)
+    public function __construct_1($userId, $name, $email, $no, $type, $state, $password)
     {
         $this->userId = $userId;
         $this->name = $name;
@@ -29,6 +32,7 @@ class User
         $this->no = $no;
         $this->type = $type;
         $this->state = $state;
+        $this->password = $password;
     }
 
     /**
@@ -125,6 +129,22 @@ class User
     public function setState($state): void
     {
         $this->state = $state;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPassword()
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param mixed $password
+     */
+    public function setPassword($password): void
+    {
+        $this->password = $password;
     }
 
 
