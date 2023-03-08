@@ -1,14 +1,12 @@
 <?php
 
-class User
+class Student
 {
-    private $userId;
+    private $studentId;
     private $name;
     private $email;
     private $no;
-    private $type;
     private $state;
-
     private $password;
 
     public function __construct()
@@ -16,21 +14,19 @@ class User
     }
 
     /**
-     * @param $userId
+     * @param $studentId
      * @param $name
      * @param $email
      * @param $no
-     * @param $type
      * @param $state
      * @param $password
      */
-    public function __construct_1($userId, $name, $email, $no, $type, $state, $password)
+    public function __construct_1($studentId, $name, $email, $no, $state, $password)
     {
-        $this->userId = $userId;
+        $this->studentId = $studentId;
         $this->name = $name;
         $this->email = $email;
         $this->no = $no;
-        $this->type = $type;
         $this->state = $state;
         $this->password = $password;
     }
@@ -38,17 +34,17 @@ class User
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getStudentId()
     {
-        return $this->userId;
+        return $this->studentId;
     }
 
     /**
-     * @param mixed $userId
+     * @param mixed $studentId
      */
-    public function setUserId($userId): void
+    public function setStudentId($studentId): void
     {
-        $this->userId = $userId;
+        $this->studentId = $studentId;
     }
 
     /**
@@ -97,22 +93,6 @@ class User
     public function setNo($no): void
     {
         $this->no = $no;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @param mixed $type
-     */
-    public function setType($type): void
-    {
-        $this->type = $type;
     }
 
     /**
