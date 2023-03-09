@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
             toggle.addEventListener('click', ()=>{
 
                 // show navbar
-                nav.classList.toggle('show')
+                nav.classList.toggle('showNav')
                 // change icon
 //                     document.getElementById("header-toggle").classList = "fa fa-window-close"
 //                     toggle.classList.toggle('fa fa-window-close')
