@@ -176,8 +176,8 @@ include("connection/config.php");
                     <div class="modal-footer">
                         <input type="hidden" name="bookid" id="bookid" />
                         <input type="hidden" name="action" id="action" value="" />
-                        <input type="submit" name="save" id="save" class="btn btn-info" value="Save" />
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" name="save" id="save" class="btn btn-success" value="Save" />
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
                     </div>
                 </div>
             </form>
@@ -229,6 +229,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ?>
 <!--Container Main end-->
 <script src="js/navbar.js"></script>
+<script src="js/alert.js"></script>
 
 </body>
 </html>
