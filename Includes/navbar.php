@@ -11,7 +11,7 @@
                 <a href="./dashboard.php" class="nav_link"> <i class='fa fa-home nav_icon'></i><span class="nav_name">Dashboard</span> </a>
                 <a href="./book.php" class="nav_link" > <i class='fa fa-book nav_icon'></i> <span class="nav_name">Books</span> </a>
                 <a href="#" class="nav_link"> <i class='fa fa-user nav_icon'></i> <span class="nav_name">Users</span> </a>
-                <a href="#" class="nav_link"> <i class='fa fa-th-large nav_icon'></i> <span class="nav_name">Category</span> </a>
+<!--                <a href="#" class="nav_link"> <i class='fa fa-th-large nav_icon'></i> <span class="nav_name">Category</span> </a>-->
                 <a href="#" class="nav_link"> <i class='fa fa-edit nav_icon'></i> <span class="nav_name">Records</span> </a>
                 <a href="#" class="nav_link"> <i class='fa fa-usd nav_icon' style="margin-left: 3px"></i> <span class="nav_name">Penalty</span> </a>
                 <a href="./login.php" class="nav_link"> <i class='fa fa-sign-in nav_icon'></i> <span class="nav_name">Login</span> </a>

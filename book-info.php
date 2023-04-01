@@ -162,7 +162,25 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
                 <div class="row mb-3">
                     <label for="category" class="col-sm-3 col-form-label">Category</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="category" name="category" value="<?php echo $category;?>" disabled>
+                        <select class="form-control" id="category" name="category" disabled>
+                            <option value="Science" <?php if($category=="Science"){ echo ' selected="selected"';}?>>Science</option>
+                            <option value="Mathematics"  <?php if($category=="Mathematics"){ echo ' selected="selected"';}?>>Mathematics</option>
+                            <option value="Social Studies"  <?php if($category=="Social Studies"){ echo ' selected="selected"';}?>>Social Studies</option>
+                            <option value="Language Arts"  <?php if($category=="Language Arts"){ echo ' selected="selected"';}?>>Language Arts</option>
+                            <option value="Business and Careers"  <?php if($category=="Business and Careers"){ echo ' selected="selected"';}?>>Business and Careers</option>
+                            <option value="Health and Physical Education"  <?php if($category=="Health and Physical Education"){ echo ' selected="selected"';}?>>Health and Physical Education</option>
+                            <option value="Technology and Engineering"  <?php if($category=="Technology and Engineering"){ echo ' selected="selected"';}?>>Technology and Engineering</option>
+                            <option value="Arts and Humanities"  <?php if($category=="Arts and Humanities"){ echo ' selected="selected"';}?>>Arts and Humanities</option>
+                            <option value="English"  <?php if($category=="English"){ echo ' selected="selected"';}?>>English</option>
+                            <option value="World Languages"  <?php if($category=="World Languages"){ echo ' selected="selected"';}?>>World Languages</option>
+                            <option value="Civics and Government"  <?php if($category=="Civics and Government"){ echo ' selected="selected"';}?>>Civics and Government</option>
+                            <option value="Media and Communications"  <?php if($category=="Media and Communications"){ echo ' selected="selected"';}?>>Media and Communications</option>
+                            <option value="Psychology and Sociology"  <?php if($category=="Psychology and Sociology"){ echo ' selected="selected"';}?>>Psychology and Sociology</option>
+                            <option value="Philosophy and Ethics"  <?php if($category=="Philosophy and Ethics"){ echo ' selected="selected"';}?>>Philosophy and Ethics</option>
+                            <option value="Education and Teaching"  <?php if($category=="Education and Teaching"){ echo ' selected="selected"';}?>>Education and Teaching</option>
+                            <option value="Law and Legal Studies"  <?php if($category=="Law and Legal Studies"){ echo ' selected="selected"';}?>>Law and Legal Studies</option>
+                            <option value="Religion and Theology"  <?php if($category=="Religion and Theology"){ echo ' selected="selected"';}?>>Religion and Theology</option>
+                        </select>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -230,6 +248,7 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
     $(function () {
         $('#edit-btn').click(function () {
             $('input').prop('disabled', false);
+            $('#category').prop('disabled', false);
             $('#edit-btn').addClass('d-none');
             $('#save-btn').removeClass('d-none');
         });

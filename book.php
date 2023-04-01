@@ -108,11 +108,24 @@ include("connection/config.php");
                     </div>
                     <div class="form-group">
                         <label for="status" class="control-label">Category</label>
-                        <select class="form-control" id="category" name="category"/>
-                        <option value="" selected disabled>Select</option>
-                        <option value="">Science</option>
-                        <option value="Enable">Maths</option>
-                        <option value="Enable">English</option>
+                        <select class="form-control" id="category" name="category">
+                        <option value="Science">Science</option>
+                        <option value="Mathematics">Mathematics</option>
+                        <option value="Social Studies">Social Studies</option>
+                        <option value="Language Arts">Language Arts</option>
+                        <option value="Business and Careers">Business and Careers</option>
+                        <option value="Health and Physical Education">Health and Physical Education</option>
+                        <option value="Technology and Engineering">Technology and Engineering</option>
+                        <option value="Arts and Humanities">Arts and Humanities</option>
+                        <option value="English">English</option>
+                        <option value="World Languages">World Languages</option>
+                        <option value="Civics and Government">Civics and Government</option>
+                        <option value="Media and Communications">Media and Communications</option>
+                        <option value="Psychology and Sociology">Psychology and Sociology</option>
+                        <option value="Philosophy and Ethics">Philosophy and Ethics</option>
+                        <option value="Education and Teaching">Education and Teaching</option>
+                        <option value="Law and Legal Studies">Law and Legal Studies</option>
+                        <option value="Religion and Theology">Religion and Theology</option>
                         </select>
                     </div>
                     <div class="form-group">
