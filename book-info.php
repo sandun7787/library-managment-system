@@ -7,7 +7,7 @@ include("connection/config.php");
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LMS - Book Information</title>
+    <title>SACK-LMS</title>
     <!--    --><?php //include("Includes/head.php");?>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="shortcut icon" type="image/jpg" href="Images/favicon.ico"/>
