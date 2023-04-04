@@ -31,7 +31,7 @@ class Librarian
     /**
      * @param mixed $username
      */
-    public function setUsername($username): void
+    public function setUsername($username)
     {
         $this->username = $username;
     }
@@ -47,7 +47,7 @@ class Librarian
     /**
      * @param mixed $password
      */
-    public function setPassword($password): void
+    public function setPassword($password)
     {
         $this->password = $password;
     }

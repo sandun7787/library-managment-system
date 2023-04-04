@@ -42,7 +42,7 @@ class Student
     /**
      * @param mixed $studentId
      */
-    public function setStudentId($studentId): void
+    public function setStudentId($studentId)
     {
         $this->studentId = $studentId;
     }
@@ -58,7 +58,7 @@ class Student
     /**
      * @param mixed $name
      */
-    public function setName($name): void
+    public function setName($name)
     {
         $this->name = $name;
     }
@@ -74,7 +74,7 @@ class Student
     /**
      * @param mixed $email
      */
-    public function setEmail($email): void
+    public function setEmail($email)
     {
         $this->email = $email;
     }
@@ -90,7 +90,7 @@ class Student
     /**
      * @param mixed $no
      */
-    public function setNo($no): void
+    public function setNo($no)
     {
         $this->no = $no;
     }
@@ -106,7 +106,7 @@ class Student
     /**
      * @param mixed $state
      */
-    public function setState($state): void
+    public function setState($state)
     {
         $this->state = $state;
     }
@@ -122,7 +122,7 @@ class Student
     /**
      * @param mixed $password
      */
-    public function setPassword($password): void
+    public function setPassword($password)
     {
         $this->password = $password;
     }

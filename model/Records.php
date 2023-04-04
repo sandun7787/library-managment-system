@@ -45,7 +45,7 @@ class Records
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -61,7 +61,7 @@ class Records
     /**
      * @param mixed $isbn
      */
-    public function setIsbn($isbn): void
+    public function setIsbn($isbn)
     {
         $this->isbn = $isbn;
     }
@@ -77,7 +77,7 @@ class Records
     /**
      * @param mixed $userId
      */
-    public function setUserId($userId): void
+    public function setUserId($userId)
     {
         $this->userId = $userId;
     }
@@ -93,7 +93,7 @@ class Records
     /**
      * @param mixed $bDate
      */
-    public function setBDate($bDate): void
+    public function setBDate($bDate)
     {
         $this->bDate = $bDate;
     }
@@ -109,7 +109,7 @@ class Records
     /**
      * @param mixed $rDate
      */
-    public function setRDate($rDate): void
+    public function setRDate($rDate)
     {
         $this->rDate = $rDate;
     }
@@ -125,7 +125,7 @@ class Records
     /**
      * @param mixed $state
      */
-    public function setState($state): void
+    public function setState($state)
     {
         $this->state = $state;
     }
@@ -141,7 +141,7 @@ class Records
     /**
      * @param mixed $penaltyState
      */
-    public function setPenaltyState($penaltyState): void
+    public function setPenaltyState($penaltyState)
     {
         $this->penaltyState = $penaltyState;
     }

@@ -39,7 +39,7 @@ class Penalty
     /**
      * @param mixed $id
      */
-    public function setId($id): void
+    public function setId($id)
     {
         $this->id = $id;
     }
@@ -55,7 +55,7 @@ class Penalty
     /**
      * @param mixed $isbn
      */
-    public function setIsbn($isbn): void
+    public function setIsbn($isbn)
     {
         $this->isbn = $isbn;
     }
@@ -71,7 +71,7 @@ class Penalty
     /**
      * @param mixed $userId
      */
-    public function setUserId($userId): void
+    public function setUserId($userId)
     {
         $this->userId = $userId;
     }
@@ -87,7 +87,7 @@ class Penalty
     /**
      * @param mixed $recordId
      */
-    public function setRecordId($recordId): void
+    public function setRecordId($recordId)
     {
         $this->recordId = $recordId;
     }
@@ -103,7 +103,7 @@ class Penalty
     /**
      * @param mixed $state
      */
-    public function setState($state): void
+    public function setState($state)
     {
         $this->state = $state;
     }

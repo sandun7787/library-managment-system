@@ -57,7 +57,7 @@ class Book
     /**
      * @param mixed $isbn
      */
-    public function setIsbn($isbn): void
+    public function setIsbn($isbn)
     {
         $this->isbn = $isbn;
     }
@@ -73,7 +73,7 @@ class Book
     /**
      * @param mixed $title
      */
-    public function setTitle($title): void
+    public function setTitle($title)
     {
         $this->title = $title;
     }
@@ -89,7 +89,7 @@ class Book
     /**
      * @param mixed $edition
      */
-    public function setEdition($edition): void
+    public function setEdition($edition)
     {
         $this->edition = $edition;
     }
@@ -105,7 +105,7 @@ class Book
     /**
      * @param mixed $price
      */
-    public function setPrice($price): void
+    public function setPrice($price)
     {
         $this->price = $price;
     }
@@ -121,7 +121,7 @@ class Book
     /**
      * @param mixed $year
      */
-    public function setYear($year): void
+    public function setYear($year)
     {
         $this->year = $year;
     }
@@ -137,7 +137,7 @@ class Book
     /**
      * @param mixed $publisher
      */
-    public function setPublisher($publisher): void
+    public function setPublisher($publisher)
     {
         $this->publisher = $publisher;
     }
@@ -153,7 +153,7 @@ class Book
     /**
      * @param mixed $imageUrl
      */
-    public function setImageUrl($imageUrl): void
+    public function setImageUrl($imageUrl)
     {
         $this->imageUrl = $imageUrl;
     }
@@ -169,7 +169,7 @@ class Book
     /**
      * @param mixed $author
      */
-    public function setAuthor($author): void
+    public function setAuthor($author)
     {
         $this->author = $author;
     }
@@ -185,7 +185,7 @@ class Book
     /**
      * @param mixed $category
      */
-    public function setCategory($category): void
+    public function setCategory($category)
     {
         $this->category = $category;
     }
@@ -201,7 +201,7 @@ class Book
     /**
      * @param mixed $rack
      */
-    public function setRack($rack): void
+    public function setRack($rack)
     {
         $this->rack = $rack;
     }
@@ -217,7 +217,7 @@ class Book
     /**
      * @param mixed $shell
      */
-    public function setShell($shell): void
+    public function setShell($shell)
     {
         $this->shell = $shell;
     }
