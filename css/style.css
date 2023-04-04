@@ -318,3 +318,8 @@ a {
     text-align:right;
 
 }
+
+/* book info form CSS */
+.book-form{
+    margin-bottom: 50px;
+}

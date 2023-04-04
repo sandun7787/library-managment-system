@@ -140,7 +140,7 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
         </div>
         <div class="col-md-8">
             <h1 class="mb-4">Book Details</h1>
-            <form method="post" enctype="multipart/form-data" action="">
+            <form method="post" enctype="multipart/form-data" action="" class="book-form">
                 <div class="row mb-3">
                     <label for="isbn" class="col-sm-3 col-form-label">ISBN</label>
                     <div class="col-sm-9">
