@@ -6,7 +6,7 @@ class Records
     private $isbn;
     private $userId;
     private $bDate;
-    private $rDate;
+    private $dDate;
     private $state;
     private $penaltyState;
 
@@ -19,17 +19,17 @@ class Records
      * @param $isbn
      * @param $userId
      * @param $bDate
-     * @param $rDate
+     * @param $dDate
      * @param $state
      * @param $penaltyState
      */
-    public function __construct_1($id, $isbn, $userId, $bDate, $rDate, $state, $penaltyState)
+    public function __construct_1($id, $isbn, $userId, $bDate, $dDate, $state, $penaltyState)
     {
         $this->id = $id;
         $this->isbn = $isbn;
         $this->userId = $userId;
         $this->bDate = $bDate;
-        $this->rDate = $rDate;
+        $this->dDate = $dDate;
         $this->state = $state;
         $this->penaltyState = $penaltyState;
     }
@@ -101,17 +101,17 @@ class Records
     /**
      * @return mixed
      */
-    public function getRDate()
+    public function getDDate()
     {
-        return $this->rDate;
+        return $this->dDate;
     }
 
     /**
-     * @param mixed $rDate
+     * @param mixed $dDate
      */
-    public function setRDate($rDate)
+    public function setDDate($dDate)
     {
-        $this->rDate = $rDate;
+        $this->dDate = $dDate;
     }
 
     /**
