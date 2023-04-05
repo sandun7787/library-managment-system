@@ -160,6 +160,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo "<script> alert('Book receive failed!');</script>";
         }
     }
+    if (isset($_POST["deleteRec"])) {
+        $check = $rec->deleteRecord($_POST["deleteRec"]);
+        if ($check == 1) {
+            echo "<script>";
+            echo "$(document).ready(function() {";
+            echo "Swal.fire({";
+            echo " icon: 'success',";
+            echo "text: 'Record deleted successfully!',";
+            echo "}).then((result) => {";
+            echo "});";
+            echo "});";
+            echo "</script>";
+        } else {
+            echo "<script> alert('Book receive failed!');</script>";
+        }
+    }
 }
 //?>
 <!--Container Main end-->

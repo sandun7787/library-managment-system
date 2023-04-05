@@ -51,7 +51,16 @@ class RecordService Implements IRecord {
 
     public function deleteRecord($recordId)
     {
-        // TODO: Implement deleteRecord() method.
+        try {
+            $conn = getCon();
+            $query = "DELETE FROM `records` WHERE `id` =$recordId";
+            $st= $conn->query($query);
+            $st->execute();
+            return 1;
+        }
+        catch(SQLiteException $ex){
+            return 0;
+        }
     }
 
     public function getAllRecords()

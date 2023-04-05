@@ -22,6 +22,7 @@ if(isset($_POST['query'])) {
                      <th scope="col">Due Date</th>
                      <th scope="col">Status</th>
                      <th scope="col"></th>
+                     <th scope="col"></th>
 
               </tr>';
             echo '</thead>';
@@ -51,6 +52,7 @@ if(isset($_POST['query'])) {
                 }
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $status . '">' . $status . '</td>';
                 echo '<td style="vertical-align: middle;"><button class="btn btn-primary"  style="margin: auto" name="confirm" type="submit"'.$btnSate.' value="' . $row[0] . '"><i class="fa fa-check "></i> Confirm recive </button></td>';
+                echo '<td style="vertical-align: middle;"><button class="btn btn-danger"  style="margin: auto" name="deleteRec" type="submit" '.$btnSate.' value="' . $row[0] . '"><i class="fa fa-trash "></i></button></td>';
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';
@@ -85,6 +87,7 @@ if(isset($_POST['query'])) {
                      <th scope="col">Due Date</th>
                      <th scope="col">Status</th>
                      <th scope="col"></th>
+                     <th scope="col"></th>
 
               </tr>';
             echo '</thead>';
@@ -100,16 +103,21 @@ if(isset($_POST['query'])) {
                 $date_now = date("Y-m-d");
                 $date = date_create($row[4]);
                 $date_convert = date_format($date, "Y-m-d");
-
+                $btnSate='';
                 if ($date_now > $date_convert) {
-                    $status= 'Pay the penalty!';
-                    $btnSate ='disabled';
+                    if($row[6]==null){
+                        $status= 'Pay the penalty!';
+                        $btnSate ='disabled';
+                    }else{
+                        $status= 'Penalty paid!';
+                    }
                 } else {
                     $status= 'No penalty';
                     $btnSate='';
                 }
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $status . '">' . $status . '</td>';
                 echo '<td style="vertical-align: middle;"><button class="btn btn-primary"  style="margin: auto" name="confirm" type="submit"'.$btnSate.' value="' . $row[0] . '"><i class="fa fa-check "></i> Confirm recive </button></td>';
+                echo '<td style="vertical-align: middle;"><button class="btn btn-danger"  style="margin: auto" name="deleteRec" type="submit" '.$btnSate.' value="' . $row[0] . '"><i class="fa fa-trash "></i></button></td>';
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';
