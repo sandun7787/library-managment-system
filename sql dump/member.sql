@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 04, 2023 at 02:52 PM
+-- Generation Time: Apr 05, 2023 at 12:08 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `member` (
-  `id` varchar(20) NOT NULL,
+  `id` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `no` varchar(20) NOT NULL,
@@ -41,8 +41,8 @@ CREATE TABLE `member` (
 --
 
 INSERT INTO `member` (`id`, `name`, `email`, `no`, `state`, `password`) VALUES
-('9540', 'Bruce Wayne', 'bruce@gmail.com', '0766786555', 'active', 'c4ca4238a0b923820dcc509a6f75849b'),
-('9563', 'Tony Stark', 'tony@gmail.com', '0766786225', 'active', 'c4ca4238a0b923820dcc509a6f75849b');
+(9540, 'Bruce Wayne', 'bruce@gmail.com', '0766786555', 'active', 'c4ca4238a0b923820dcc509a6f75849b'),
+(9563, 'Tony Stark', 'tony@gmail.com', '0766786225', 'active', 'c4ca4238a0b923820dcc509a6f75849b');
 
 --
 -- Indexes for dumped tables
