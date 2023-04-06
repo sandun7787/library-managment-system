@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 05, 2023 at 12:08 PM
+-- Generation Time: Apr 06, 2023 at 11:41 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `records` (
   `id` int(11) NOT NULL,
-  `book_id` varchar(50) NOT NULL,
+  `book_id` int(11) NOT NULL,
   `borrower_id` int(11) NOT NULL,
   `borrow_date` date NOT NULL,
   `due_date` date NOT NULL,
@@ -42,12 +42,7 @@ CREATE TABLE `records` (
 --
 
 INSERT INTO `records` (`id`, `book_id`, `borrower_id`, `borrow_date`, `due_date`, `return_date`, `penalty`) VALUES
-(3, '1234567890', 9540, '2023-03-14', '2023-04-01', NULL, NULL),
-(4, '6986239647', 9563, '2023-03-12', '2023-04-06', NULL, NULL),
-(6, '1234567890', 9563, '2023-04-07', '2023-04-03', NULL, NULL),
-(7, '1234567890', 9563, '2023-04-13', '2023-04-14', NULL, NULL),
-(8, '1234567890', 9540, '2023-04-05', '2023-04-30', NULL, NULL),
-(9, '1234567890', 9540, '2023-04-05', '2023-04-20', NULL, NULL);
+(11, 20, 9563, '2023-04-06', '2023-04-03', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -69,7 +64,7 @@ ALTER TABLE `records`
 -- AUTO_INCREMENT for table `records`
 --
 ALTER TABLE `records`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables
@@ -79,7 +74,7 @@ ALTER TABLE `records`
 -- Constraints for table `records`
 --
 ALTER TABLE `records`
-  ADD CONSTRAINT `fk_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`isbn`),
+  ADD CONSTRAINT `fk_book` FOREIGN KEY (`book_id`) REFERENCES `book` (`bookId`),
   ADD CONSTRAINT `fk_user` FOREIGN KEY (`borrower_id`) REFERENCES `member` (`id`);
 COMMIT;
 

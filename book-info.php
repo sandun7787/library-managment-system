@@ -80,6 +80,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $category=$book->setCategory($_POST['category']);
             $rack=$book->setRack($_POST['rack']);
             $shell=$book->setShell($_POST['shell']);
+
+            if($_POST['newNoc']>0){
+                $addNoc = $book->setNumOfBooks($_POST["newNoc"]);
+                $addCopy = $bookS->addBook($book);
+            }
+
             //  Write to db
             try {
                 $check=$bookS->updateBook($book);
@@ -247,9 +253,15 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
                     </div>
                 </div>
                 <div class="row mb-3">
-                    <label for="noc" class="col-sm-3 col-form-label">Number of copies</label>
+                    <label for="numberOfCopies" class="col-sm-3 col-form-label">Existing copies</label>
                     <div class="col-sm-9">
-                        <label for="noc" class="col-sm-3 col-form-label" name="isbn"><?php echo $bookCount;?></label>
+                        <label for="numberOfCopies" class="col-sm-3 col-form-label" name="numberOfCopies"><?php echo $bookCount;?></label>
+                    </div>
+                </div>
+                <div class="row mb-3" id="newCopies" hidden>
+                    <label for="noc" class="col-sm-3 col-form-label">New no of copies</label>
+                    <div class="col-sm-9">
+                        <input type="number" class="form-control" id="newNoc" name="newNoc" min="0" value="0" disabled>
                     </div>
                 </div>
 
@@ -278,6 +290,7 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
             $('#category').prop('disabled', false);
             $('#edit-btn').addClass('d-none');
             $('#save-btn').removeClass('d-none');
+            $('#newCopies').prop('hidden',false);
         });
     });
 </script>
