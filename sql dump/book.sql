@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2023 at 11:41 AM
+-- Generation Time: Apr 06, 2023 at 07:44 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -50,9 +50,10 @@ INSERT INTO `book` (`bookId`, `isbn`, `name`, `edition`, `price`, `year`, `pub`,
 (1, '1234567890', 'Oliver Twist', '3rd', '200', '2023', 'Pearson', 'https://i2-prod.walesonline.co.uk/incoming/article6890072.ece/ALTERNATES/s615b/hp1.jpg', 'Mark Twain', 'Science', '21', '10'),
 (2, '2358529384782', 'Titanic', '20', '44444', '1190', 'Bruce ', 'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781499811063/escape-from-the-titanic-9781499811063_hr.jpg', 'Bruce Wayne', 'Arts and Humanities', '1', '2'),
 (3, '6986239647', 'Harry potter', '2nd edition', '44500', '2017', 'Tony ', 'https://i2-prod.walesonline.co.uk/incoming/article6890072.ece/ALTERNATES/s615b/hp1.jpg', 'Hello', 'Education and Teaching', '4', '1'),
-(19, '1234', 'Hello World 2', '5', '100', '2021', 'Tony Stark', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoGBxQTExYTFBMYFhYYGhoZGxoYFhwhHRoaIBscGhwcGhocHysiGhwoHxkaJDQkLS07MTExGyE3PDcwOyswMS4BCwsLDw4PHRERHDApICkuMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwM', 'Bruce Wayne', 'Civics and Government', '1', '3'),
-(20, '1234', 'Hello World 2', '5', '100', '2021', 'Tony Stark', 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoGBxQTExYTFBMYFhYYGhoZGxoYFhwhHRoaIBscGhwcGhocHysiGhwoHxkaJDQkLS07MTExGyE3PDcwOyswMS4BCwsLDw4PHRERHDApICkuMDAwMDAwMDAwMDAwMjAwMDAwMDAwMDAwMDAwM', 'Bruce Wayne', 'Civics and Government', '1', '3'),
-(23, '2358529384782', 'Titanic', '20', '44444', '1190', 'Bruce ', 'https://d28hgpri8am2if.cloudfront.net/book_images/onix/cvr9781499811063/escape-from-the-titanic-9781499811063_hr.jpg', 'Bruce Wayne', 'Arts and Humanities', '1', '2');
+(19, '1234', 'Hello World 2', '5', '100', '2021', 'Tony Stark', 'https://cdn.cp.adobe.io/content/2/rendition/9231d555-36b8-43cf-9270-e0adfb6a9564/artwork/ea997594-eee5-44dd-9a88-bc5fd31abb80/version/0/format/jpg/dimension/width/size/400', 'Bruce Wayne', 'Civics and Government', '1', '3'),
+(20, '1234', 'Hello World 2', '5', '100', '2021', 'Tony Stark', 'https://cdn.cp.adobe.io/content/2/rendition/9231d555-36b8-43cf-9270-e0adfb6a9564/artwork/ea997594-eee5-44dd-9a88-bc5fd31abb80/version/0/format/jpg/dimension/width/size/400', 'Bruce Wayne', 'Civics and Government', '1', '3'),
+(31, '1234567890', 'Oliver Twist', '3rd', '200', '2023', 'Pearson', 'https://i2-prod.walesonline.co.uk/incoming/article6890072.ece/ALTERNATES/s615b/hp1.jpg', 'Mark Twain', 'Science', '21', '10'),
+(32, '1234567890', 'Oliver Twist', '3rd', '200', '2023', 'Pearson', 'https://i2-prod.walesonline.co.uk/incoming/article6890072.ece/ALTERNATES/s615b/hp1.jpg', 'Mark Twain', 'Science', '21', '10');
 
 --
 -- Indexes for dumped tables
@@ -72,7 +73,7 @@ ALTER TABLE `book`
 -- AUTO_INCREMENT for table `book`
 --
 ALTER TABLE `book`
-  MODIFY `bookId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `bookId` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
