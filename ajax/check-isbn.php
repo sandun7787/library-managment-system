@@ -5,12 +5,10 @@ $conn = getCon();
     $result = $conn->query($query);
     $count = $result->rowCount();
     if($count>0) {
-        foreach ($result as $row) {
             echo'<div style="margin-top: 10px">';
             echo "<span style='color:red'> ISBN number taken</span>";
             echo "<script>$('#save').prop('disabled',true);</script>";
             echo'</div>';
-        }
     }
     else{
         echo'<div style="margin-top: 10px">';

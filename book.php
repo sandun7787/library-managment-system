@@ -129,6 +129,11 @@ include("connection/config.php");
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="book" class="control-label">Number of copies</label>
+                        <input type="number" name="noc" id="noc" autocomplete="off" class="form-control"
+                               placeholder="Number of copies" required/>
+                    </div>
+                    <div class="form-group">
                         <label for="book" class="control-label">Rack</label>
                         <input type="text" name="rack" id="rack" autocomplete="off" class="form-control"
                                placeholder="Rack" required/>
@@ -167,6 +172,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $category = $book->setCategory($_POST["category"]);
             $rack = $book->setRack($_POST["rack"]);
             $shell = $book->setShell($_POST["shell"]);
+            $noc = $book->setNumOfBooks($_POST["noc"]);
 
             //Write to db
             try {

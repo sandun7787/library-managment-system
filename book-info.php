@@ -44,16 +44,32 @@ try {
         $category=$row[8];
         $rack=$row[9];
         $shell=$row[10];
+        $bookId=$row[11];
     }
 } catch (PDOException $th) {
     echo $th->getMessage();
 }
 
+try{
+    $bookCount=$bookS->bookCount($isbn);
+
+}catch(PDOException $ex){
+    echo $th->getMessage();
+}
+
+try{
+    $bookIds=$bookS->getBookIds($isbn);
+
+}catch(PDOException $ex){
+    echo $th->getMessage();
+}
+
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['save'])) {
-
         try {
-            $isbn=$book->setIsbn($id);
+            $bookId=$book->setBookId($id);
+            $isbn=$book->setIsbn($isbn);
             $name=$book->setTitle($_POST['title']);
             $edition=$book->setEdition($_POST['edition']);
             $price=$book->setPrice($_POST['price']);
@@ -64,7 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $category=$book->setCategory($_POST['category']);
             $rack=$book->setRack($_POST['rack']);
             $shell=$book->setShell($_POST['shell']);
-
             //  Write to db
             try {
                 $check=$bookS->updateBook($book);
@@ -141,6 +156,12 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
         <div class="col-md-8">
             <h1 class="mb-4">Book Details</h1>
             <form method="post" enctype="multipart/form-data" action="" class="book-form">
+                <div class="row mb-3">
+                    <label for="book-id" class="col-sm-3 col-form-label">Book ID(s)</label>
+                    <div class="col-sm-9">
+                        <label for="isbn" class="col-sm-3 col-form-label" name="bookId"><?php echo implode(", ", $bookIds);?></label>
+                    </div>
+                </div>
                 <div class="row mb-3">
                     <label for="isbn" class="col-sm-3 col-form-label">ISBN</label>
                     <div class="col-sm-9">
@@ -223,6 +244,12 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
                     <label for="shelf-number" class="col-sm-3 col-form-label">Image URL</label>
                     <div class="col-sm-9">
                         <input type="text" class="form-control" id="url" name="imgUrl" value="<?php echo $imageUrl;?>" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="noc" class="col-sm-3 col-form-label">Number of copies</label>
+                    <div class="col-sm-9">
+                        <label for="noc" class="col-sm-3 col-form-label" name="isbn"><?php echo $bookCount;?></label>
                     </div>
                 </div>
 

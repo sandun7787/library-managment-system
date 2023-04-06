@@ -4,7 +4,7 @@ if(isset($_POST['query'])) {
     if($_POST['query'] == null) {
         include '../connection/config.php';
         $conn = getCon();
-        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`,`edition`, `price`, `year`, `pub`,  `rack`, `shell` FROM `book`";
+        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`,`edition`, `price`, `year`, `pub`,  `rack`, `shell`,`bookid` FROM `book`";
         $result = $conn->query($query);
         $count = $result->rowCount();
 
@@ -16,6 +16,7 @@ if(isset($_POST['query'])) {
             echo '<thead class="thead-dark">';
             echo '<tr>
                       <th scope="col">Cover</th>
+                      <th scope="col">Book ID</th>
                      <th scope="col">Name</th>
                      <th scope="col">ISBN</th>
                      <th scope="col">Author</th>
@@ -29,11 +30,12 @@ if(isset($_POST['query'])) {
                 echo '<tbody>';
                 echo '<tr class="rw">';
                 echo '<td style="vertical-align: middle;"><img src="'.$row[0].'" width="80" height="90"></td>';
+                echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[11] . '">' . $row[11] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[1] . '">' . $row[1] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row[2] . '">' . $row[2] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[3] . '">' . $row[3] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row[4] . '">' . $row[4] . '</td>';
-                echo '<td style="vertical-align: middle;"><button class="btn btn-primary"  style="margin: auto" name="viewBook" type="submit"  value="' . $row[2] . '"><i class="fa fa-info-circle "></i>  </button></td>';
+                echo '<td style="vertical-align: middle;"><button class="btn btn-primary"  style="margin: auto" name="viewBook" type="submit"  value="' . $row[11] . '"><i class="fa fa-info-circle "></i>  </button></td>';
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';
@@ -50,7 +52,7 @@ if(isset($_POST['query'])) {
     else {
         include '../connection/config.php';
         $conn = getCon();
-        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`,`edition`, `price`, `year`, `pub`,  `rack`, `shell` FROM `book` WHERE name LIKE '{$_POST['query']}%' LIMIT 100";
+        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`,`edition`, `price`, `year`, `pub`,  `rack`, `shell`,`bookid` FROM `book` WHERE name LIKE '{$_POST['query']}%' LIMIT 100";
         $result = $conn->query($query);
         $count = $result->rowCount();
 
@@ -62,6 +64,7 @@ if(isset($_POST['query'])) {
             echo '<thead class="thead-dark">';
             echo '<tr>
                       <th scope="col">Cover</th>
+                      <th scope="col">Book ID</th>
                      <th scope="col">Name</th>
                      <th scope="col">ISBN</th>
                      <th scope="col">Author</th>
@@ -71,14 +74,16 @@ if(isset($_POST['query'])) {
               </tr>';
             echo '</thead>';
             foreach ($result as $row) {
+
                 echo '<tbody>';
                 echo '<tr class="rw">';
                 echo '<td style="vertical-align: middle;"><img src="'.$row[0].'" width="80" height="90"></td>';
+                echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[11] . '">' . $row[11] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[1] . '">' . $row[1] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row[2] . '">' . $row[2] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[3] . '">' . $row[3] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row[4] . '">' . $row[4] . '</td>';
-                echo '<td style="vertical-align: middle;"><button class="btn btn-primary"  style="margin: auto" name="viewBook" type="submit"  value="' . $row[2] . '"><i class="fa fa-info-circle "></i>  </button></td>';
+                echo '<td style="vertical-align: middle;"><button class="btn btn-primary"  style="margin: auto" name="viewBook" type="submit"  value="' . $row[11] . '"><i class="fa fa-info-circle "></i>  </button></td>';
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';

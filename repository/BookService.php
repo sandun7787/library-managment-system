@@ -4,10 +4,13 @@ session_start();
 interface IBook
 {
     public function addBook(Book $book);
-    public function getBook($isbn);
+    public function getBook($bookId);
     public function updateBook(Book $book);
-    public function deleteBook($isbn);
+    public function deleteBook($bookId);
     public function getAllBooks();
+
+    public function bookCount($isbn);
+    public function getBookIds($isbn);
 
 }
 
@@ -30,9 +33,11 @@ class BookService implements IBook{
             $category=$book->getCategory();
             $rack=$book->getRack();
             $shell=$book->getShell();
+            $noc=$book->getNumOfBooks();
 
-
-            $query = "INSERT INTO `book`(`isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell`) 
+            $x = 1;
+            while($x <= $noc) {
+            $query = "INSERT INTO `book`(`isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell`)
                         VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
             $st = $conn->prepare($query);
@@ -49,7 +54,8 @@ class BookService implements IBook{
             $st->bindValue(10, $rack, PDO::PARAM_STR);
             $st->bindValue(11, $shell, PDO::PARAM_STR);
             $st->execute();
-
+                $x++;
+            }
             return 1;
         }
         catch(SQLiteException $ex){
@@ -57,10 +63,10 @@ class BookService implements IBook{
         }
     }
 
-    public function getBook($isbn)
+    public function getBook($bookId)
     {
         $conn = getCon();
-        $query = "SELECT `isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell` FROM `book` WHERE `isbn` =$isbn ";
+        $query = "SELECT `isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell`,`bookId` FROM `book` WHERE `bookId` =$bookId ";
         $result = $conn->query($query);
         return $result;
         // TODO: Implement getBook() method.
@@ -71,6 +77,7 @@ class BookService implements IBook{
         try {
             $conn = getCon();
 
+            $bookId=$book->getBookId();
             $isbn=$book->getIsbn();
             $name=$book->getTitle();
             $edition=$book->getEdition();
@@ -82,6 +89,7 @@ class BookService implements IBook{
             $category=$book->getCategory();
             $rack=$book->getRack();
             $shell=$book->getShell();
+
 
             $query = "UPDATE `book` SET `name`=?,`edition`=?,`price`=?,`year`=?,`pub`=?,`imgUrl`=?,`author`=?,`cat`=?,`rack`=?,`shell`=? WHERE `isbn` = $isbn";
 
@@ -105,11 +113,11 @@ class BookService implements IBook{
         // TODO: Implement updateBook() method.
     }
 
-    public function deleteBook($isbn)
+    public function deleteBook($bookId)
     {
         try {
             $conn = getCon();
-            $query = "DELETE FROM `book` WHERE `isbn` =$isbn";
+            $query = "DELETE FROM `book` WHERE `bookId` =$bookId";
             $st= $conn->query($query);
             $st->execute();
             return 1;
@@ -124,9 +132,34 @@ class BookService implements IBook{
     public function getAllBooks()
     {
         $conn=getCon();
-        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat` FROM `book`";
+        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`, `bookId` FROM `book`";
         $result = $conn->query($query);
         return $result;
          // TODO: Implement getAllBooks() method.
+    }
+
+    public function bookCount($isbn)
+    {
+        $conn = getCon();
+        $query = "SELECT `isbn`, `name`,`bookId` 
+                    FROM `book` WHERE `isbn` =$isbn ";
+        $result = $conn->query($query);
+        $count = $result->rowCount();
+        return $count;
+        // TODO: Implement bookCount() method.
+    }
+
+    public function getBookIds($isbn)
+    {
+        $conn = getCon();
+        $query = "SELECT `isbn`, `name`,`bookId` 
+                    FROM `book` WHERE `isbn` =$isbn ";
+        $result = $conn->query($query);
+        $ids = array();
+        foreach ($result as $row) {
+            array_push($ids,$row[2]);
+        }
+        return $ids;
+        // TODO: Implement bookCount() method.
     }
 }

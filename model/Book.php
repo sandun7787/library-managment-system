@@ -2,6 +2,7 @@
 
 class Book
 {
+    private $bookId;
     private $isbn;
     private $title;
     private $edition;
@@ -13,12 +14,14 @@ class Book
     private $category;
     private $rack;
     private $shell;
+    private $numOfBooks;
 
     public function __construct()
     {
     }
 
     /**
+     * @param $bookId
      * @param $isbn
      * @param $title
      * @param $edition
@@ -30,9 +33,11 @@ class Book
      * @param $category
      * @param $rack
      * @param $shell
+     * @param $numOfBooks
      */
-    public function __construct_1($isbn, $title, $edition, $price, $year, $publisher, $imageUrl, $author, $category, $rack, $shell)
+    public function __construct_1($bookId, $isbn, $title, $edition, $price, $year, $publisher, $imageUrl, $author, $category, $rack, $shell, $numOfBooks)
     {
+        $this->bookId = $bookId;
         $this->isbn = $isbn;
         $this->title = $title;
         $this->edition = $edition;
@@ -44,6 +49,7 @@ class Book
         $this->category = $category;
         $this->rack = $rack;
         $this->shell = $shell;
+        $this->numOfBooks= $numOfBooks;
     }
 
     /**
@@ -222,6 +228,37 @@ class Book
         $this->shell = $shell;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getBookId()
+    {
+        return $this->bookId;
+    }
+
+    /**
+     * @param mixed $bookId
+     */
+    public function setBookId($bookId): void
+    {
+        $this->bookId = $bookId;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getNumOfBooks()
+    {
+        return $this->numOfBooks;
+    }
+
+    /**
+     * @param mixed $numOfBooks
+     */
+    public function setNumOfBooks($numOfBooks): void
+    {
+        $this->numOfBooks = $numOfBooks;
+    }
 
 
 }

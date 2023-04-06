@@ -10,6 +10,7 @@ if($count>0) {
         echo "<span style='color:green'>  ".$row['name']."</span>";
         echo "<script>$('#saveRec').prop('disabled',false);</script>";
         echo'</div>';
+        break;
     }
 }
 else{
