@@ -3,11 +3,11 @@
 class Records
 {
     private $id;
-    private $isbn;
+    private $bookId;
     private $userId;
     private $bDate;
     private $dDate;
-    private $state;
+    private $rDate;
     private $penaltyState;
 
     public function __construct()
@@ -16,21 +16,21 @@ class Records
 
     /**
      * @param $id
-     * @param $isbn
+     * @param $bookId
      * @param $userId
      * @param $bDate
      * @param $dDate
-     * @param $state
+     * @param $rDate
      * @param $penaltyState
      */
-    public function __construct_1($id, $isbn, $userId, $bDate, $dDate, $state, $penaltyState)
+    public function __construct_1($id, $bookId, $userId, $bDate, $dDate, $rDate, $penaltyState)
     {
         $this->id = $id;
-        $this->isbn = $isbn;
+        $this->bookId = $bookId;
         $this->userId = $userId;
         $this->bDate = $bDate;
         $this->dDate = $dDate;
-        $this->state = $state;
+        $this->rDate = $rDate;
         $this->penaltyState = $penaltyState;
     }
 
@@ -50,21 +50,6 @@ class Records
         $this->id = $id;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getIsbn()
-    {
-        return $this->isbn;
-    }
-
-    /**
-     * @param mixed $isbn
-     */
-    public function setIsbn($isbn)
-    {
-        $this->isbn = $isbn;
-    }
 
     /**
      * @return mixed
@@ -117,7 +102,7 @@ class Records
     /**
      * @return mixed
      */
-    public function getState()
+    public function getRDate()
     {
         return $this->state;
     }
@@ -125,7 +110,7 @@ class Records
     /**
      * @param mixed $state
      */
-    public function setState($state)
+    public function setRDate($state)
     {
         $this->state = $state;
     }
@@ -145,6 +130,23 @@ class Records
     {
         $this->penaltyState = $penaltyState;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getBookId()
+    {
+        return $this->bookId;
+    }
+
+    /**
+     * @param mixed $bookId
+     */
+    public function setBookId($bookId): void
+    {
+        $this->bookId = $bookId;
+    }
+
 
 
 

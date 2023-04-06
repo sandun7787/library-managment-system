@@ -68,9 +68,9 @@ include("connection/config.php");
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="book" class="control-label">ISBN No</label>
-                        <input type="text" name="isbn" id="isbn" autocomplete="off" class="form-control"
-                               placeholder="isbn name" oninput="getBook()" required/>
+                        <label for="book" class="control-label">Book ID</label>
+                        <input type="text" name="bookId" id="bookId" autocomplete="off" class="form-control"
+                               placeholder="book id" oninput="getBook()" required/>
                         <span id="get-book"></span>
                     </div>
                     <div class="form-group">
@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['saveRec'])) {
         try {
 
-            $isbn = $record->setIsbn($_POST["isbn"]);
+            $bookId = $record->setBookId($_POST["bookId"]);
             $name = $record->setUserId($_POST["memberId"]);
             $bDate = $record->setBDate($_POST["bDate"]);
             $dDate = $record->setDDate($_POST["dDate"]);
@@ -242,7 +242,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function getBook() {
         $.ajax({
             url: "ajax/get-book.php",
-            data: 'isbn=' + $("#isbn").val(),
+            data: 'bookId=' + $("#bookId").val(),
             type: "POST",
             success: function (data) {
                 $("#get-book").html(data);

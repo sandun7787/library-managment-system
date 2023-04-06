@@ -1,7 +1,7 @@
 <?php
 include '../connection/config.php';
 $conn = getCon();
-$query = "SELECT `name` FROM book WHERE isbn='" . $_POST["isbn"] . "'";
+$query = "SELECT `name` FROM book WHERE bookId='" . $_POST["bookId"] . "'";
 $result = $conn->query($query);
 $count = $result->rowCount();
 if($count>0) {
@@ -15,7 +15,7 @@ if($count>0) {
 }
 else{
     echo'<div style="margin-top: 10px">';
-    echo "<span style='color:red'> Invalid ISBN</span>";
+    echo "<span style='color:red'> Invalid Book ID</span>";
     echo "<script>$('#saveRec').prop('disabled',true);</script>";
     echo'</div>';
 }

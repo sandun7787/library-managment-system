@@ -22,7 +22,7 @@ class RecordService Implements IRecord {
         try {
             $conn = getCon();
 
-            $isbn=$record->getIsbn();
+            $bookId=$record->getBookId();
             $user=$record->getUserId();
             $bDate=$record->getBDate();
             $dDate=$record->getDDate();
@@ -31,7 +31,7 @@ class RecordService Implements IRecord {
                         VALUES (?,?,?,?)";
 
             $st = $conn->prepare($query);
-            $st->bindValue(1, $isbn, PDO::PARAM_STR);
+            $st->bindValue(1, $bookId, PDO::PARAM_STR);
             $st->bindValue(2, $user, PDO::PARAM_STR);
             $st->bindValue(3, $bDate, PDO::PARAM_STR);
             $st->bindValue(4, $dDate, PDO::PARAM_STR);
