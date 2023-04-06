@@ -131,7 +131,7 @@ include("connection/config.php");
                     <div class="form-group">
                         <label for="book" class="control-label">Number of copies</label>
                         <input type="number" name="noc" id="noc" autocomplete="off" class="form-control"
-                               placeholder="Number of copies" required/>
+                               placeholder="Number of copies" min="0" value="1" required/>
                     </div>
                     <div class="form-group">
                         <label for="book" class="control-label">Rack</label>
