@@ -56,11 +56,26 @@ a {
     display: flex;
     justify-content: center;
     border-radius: 50%;
-    overflow: hidden
+    overflow: hidden;
+    margin-left: 1rem;
 }
 
 .header_img img {
-    width: 40px
+    width: 40px;
+}
+
+.header_items {
+    display: flex;
+    align-items: center;
+}
+
+.header_item {
+    margin-left: 1rem;
+}
+
+.header_item a {
+    color: #000000;
+    text-decoration: none;
 }
 
 .l-navbar {
