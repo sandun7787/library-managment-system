@@ -7,7 +7,7 @@ interface IReservation
     public function getReservation($reservationId);
     public function deleteReservation($reservationId);
     public function getAllReservations();
-    public function ChangeReservationState($reservationId);
+    public function changeReservationState($reservationId,$state);
 
 }
 class ReservationService implements IReservation {
@@ -54,8 +54,17 @@ class ReservationService implements IReservation {
         // TODO: Implement getAllReservations() method.
     }
 
-    public function ChangeReservationState($reservationId)
+    public function changeReservationState($reservationId,$state)
     {
-        // TODO: Implement ChangeReservationState() method.
+        try {
+            $conn = getCon();
+            $query = "UPDATE `reservation` SET `state`=? WHERE `id` = $reservationId";
+            $st = $conn->prepare($query);
+            $st->bindValue(1, $state, PDO::PARAM_STR);
+            $st->execute();
+            return 1;
+        } catch (SQLiteException $ex) {
+            return 0;
+        }
     }
 }

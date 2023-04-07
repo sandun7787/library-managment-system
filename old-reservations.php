@@ -24,7 +24,7 @@ include("connection/config.php");
 
 <!--Container Main start-->
 <div class="main container">
-    <h1>Manage Reservations</h1>
+    <h1>Old Reservations</h1>
 
     <!--    <div class="row">-->
     <div class="d-flex flex-row" style="margin: 20px 0px 20px 10px;">
@@ -36,9 +36,8 @@ include("connection/config.php");
             <button type="button" id="viewTable" class="btn btn-primary" style="margin-top: 10px"><span
                     class="glyphicon glyphicon-plus">View All </span></button>
         </div>
-        <div class="ml-auto p-2" >
-            <button type="button" id="viewOldRec" class="btn btn-primary" style="margin: 20px" onclick="window.location.href='old-reservations.php';" ><span
-                    class="glyphicon glyphicon-plus">View Completed & Rejected Reservations</span></button>
+        <div class="ml-auto p-2">
+            <button type="button" class="btn btn-secondary" onclick="window.history.back()" style="margin: 20px">Back to Previous Page</button>
         </div>
     </div>
 
@@ -52,62 +51,6 @@ include("connection/config.php");
 
 </div>
 
-
-<?php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    include 'repository/ReservationService.php';
-    $resS = new ReservationService();
-
-    if (isset($_POST["accept"])) {
-        $check = $resS->changeReservationState($_POST["accept"],"accepted");
-        if ($check == 1) {
-            echo "<script>";
-            echo "$(document).ready(function() {";
-            echo "Swal.fire({";
-            echo " icon: 'success',";
-            echo "text: 'Reservation accepted!',";
-            echo "}).then((result) => {";
-            echo "});";
-            echo "});";
-            echo "</script>";
-        } else {
-            echo "<script> alert('Reservation state failed!');</script>";
-        }
-    }
-    if (isset($_POST["reject"])) {
-        $check = $resS->changeReservationState($_POST["reject"],"rejected");
-        if ($check == 1) {
-            echo "<script>";
-            echo "$(document).ready(function() {";
-            echo "Swal.fire({";
-            echo " icon: 'warning',";
-            echo "text: 'Reservation rejected!',";
-            echo "}).then((result) => {";
-            echo "});";
-            echo "});";
-            echo "</script>";
-        } else {
-            echo "<script> alert('Reservation state failed!');</script>";
-        }
-    }
-    if (isset($_POST["complete"])) {
-        $check = $resS->changeReservationState($_POST["complete"],"completed");
-        if ($check == 1) {
-            echo "<script>";
-            echo "$(document).ready(function() {";
-            echo "Swal.fire({";
-            echo " icon: 'success',";
-            echo "text: 'Reservation completed  !',";
-            echo "}).then((result) => {";
-            echo "});";
-            echo "});";
-            echo "</script>";
-        } else {
-            echo "<script> alert('Reservation state failed!');</script>";
-        }
-    }
-}
-?>
 <!--Container Main end-->
 <script src="js/navbar.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
@@ -116,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         //get the full table
         $.ajax({
-            url: 'ajax/get-reservations.php',
+            url: 'ajax/get-old-reservations.php',
             method: 'POST',
             dataType: "html",
             data: "query=",
@@ -133,7 +76,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             var query = $(this).val();
             if (query != "") {
                 $.ajax({
-                    url: 'ajax/get-reservations.php',
+                    url: 'ajax/get-old-reservations.php',
                     method: 'POST',
                     data: {
                         query: query

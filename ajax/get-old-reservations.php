@@ -4,19 +4,16 @@ if(isset($_POST['query'])) {
     if($_POST['query'] == null) {
         include '../connection/config.php';
         $conn = getCon();
-        $query=  "SELECT book.name, reservation.id, reservation.date, reservation.reqDate, reservation.state
+        $query= "SELECT book.name, reservation.id, reservation.date, reservation.reqDate, reservation.state, reservation.userId, reservation.bookId
             FROM reservation 
             JOIN book ON book.bookId = reservation.bookId 
-            WHERE reservation.userId = '9563' 
+            WHERE reservation.state IN ('completed', 'rejected')
             ORDER BY 
               CASE reservation.state 
-                WHEN 'pending' THEN 1 
-                WHEN 'accepted' THEN 2 
-                WHEN 'rejected' THEN 3 
-                WHEN 'completed' THEN 4 
-              END;
-            ";
-
+                WHEN 'completed' THEN 1 
+                WHEN 'rejected' THEN 2 
+              END, 
+              reservation.date DESC;";
         $result = $conn->query($query);
         $count = $result->rowCount();
 
@@ -27,14 +24,14 @@ if(isset($_POST['query'])) {
             echo '<table class="table" style="border:solid #dee2e6 1px;">';
             echo '<thead class="thead-dark">';
             echo '<tr>
-                     <th scope="col">Reservation ID</th>
+                     <th scope="col">ID</th>
                      <th scope="col">Book</th>
+                     <th scope="col">Book ID</th>
+                     <th scope="col">User ID</th>
                      <th scope="col">Date</th>
-                     <th scope="col">Requesting Date</th>
+                     <th scope="col">Request Date</th>
                      <th scope="col">State</th>
-                     <th scope="col"></th>
-                     
-
+                     <th scope="col"></th> 
               </tr>';
             echo '</thead>';
             foreach ($result as $row) {
@@ -43,13 +40,13 @@ if(isset($_POST['query'])) {
                 echo '<tr class="rw">';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["id"] . '">' . $row["id"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["name"] . '">' . $row["name"] . '</td>';
+                echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["bookId"] . '">' . $row["bookId"] . '</td>';
+                echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row["userId"] . '">' . $row["userId"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row["date"] . '">' . $row["date"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row["reqDate"] . '">' . $row["reqDate"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["state"] . '">' . $row["state"] . '</td>';
+                echo '<td style="vertical-align: middle;"></td>';
 
-                if ($row["state"]=="pending"){
-                    echo '<td style="vertical-align: middle;"><button class="btn btn-primary" style="margin: auto" name="pay" type="submit" value="' . $row[0] . '"><i class="fa fa fa-trash"></i> </button></td>';
-                }
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';
@@ -64,18 +61,17 @@ if(isset($_POST['query'])) {
     else {
         include '../connection/config.php';
         $conn = getCon();
-        $query= "SELECT book.name, reservation.id, reservation.date, reservation.reqDate, reservation.state
+        $query=  "SELECT book.name, reservation.id, reservation.date, reservation.reqDate, reservation.state, reservation.userId, reservation.bookId
             FROM reservation 
             JOIN book ON book.bookId = reservation.bookId 
-            WHERE reservation.userId = '9563' AND book.name LIKE '{$_POST['query']}%'
+            WHERE reservation.state IN ('completed', 'rejected') AND reservation.userId = '9563' AND book.name LIKE '{$_POST['query']}%'
             ORDER BY 
               CASE reservation.state 
-                WHEN 'pending' THEN 1 
-                WHEN 'accepted' THEN 2 
-                WHEN 'rejected' THEN 3 
-                WHEN 'completed' THEN 4 
-              END;
-            ";
+                WHEN 'completed' THEN 1 
+                WHEN 'rejected' THEN 2 
+              END, 
+              reservation.date DESC;";
+
         $result = $conn->query($query);
         $count = $result->rowCount();
 
@@ -86,14 +82,14 @@ if(isset($_POST['query'])) {
             echo '<table class="table" style="border:solid #dee2e6 1px;">';
             echo '<thead class="thead-dark">';
             echo '<tr>
-                     <th scope="col">Reservation ID</th>
+                     <th scope="col">ID</th>
                      <th scope="col">Book</th>
+                     <th scope="col">Book ID</th>
+                     <th scope="col">User ID</th>
                      <th scope="col">Date</th>
-                     <th scope="col">Requesting Date</th>
+                     <th scope="col">Request Date</th>
                      <th scope="col">State</th>
-                     <th scope="col"></th>
-                     
-
+                     <th scope="col"></th> 
               </tr>';
             echo '</thead>';
             foreach ($result as $row) {
@@ -102,13 +98,13 @@ if(isset($_POST['query'])) {
                 echo '<tr class="rw">';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["id"] . '">' . $row["id"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["name"] . '">' . $row["name"] . '</td>';
+                echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["bookId"] . '">' . $row["bookId"] . '</td>';
+                echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row["userId"] . '">' . $row["userId"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row["date"] . '">' . $row["date"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row["reqDate"] . '">' . $row["reqDate"] . '</td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden"  value="' . $row["state"] . '">' . $row["state"] . '</td>';
+                echo '<td style="vertical-align: middle;"></td>';
 
-                if ($row["state"]=="pending"){
-                    echo '<td style="vertical-align: middle;"><button class="btn btn-primary" style="margin: auto" name="pay" type="submit" value="' . $row[0] . '"><i class="fa fa fa-trash"></i> </button></td>';
-                }
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';
@@ -117,11 +113,9 @@ if(isset($_POST['query'])) {
             echo '</form></div> </div>';
         }
         else {
-            echo "<span  style='color:red; margin-left: auto; margin-right: auto; display: table; margin-top: 50px;' class='features CardBgCol' > No available reservation records</span>";
+            echo "<span  style='color:red; margin-left: auto; margin-right: auto; display: table; margin-top: 50px;' class='features CardBgCol' >  No available reservation records</span>";
         }
     }
 }
 
 ?>
-
-
