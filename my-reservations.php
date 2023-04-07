@@ -30,7 +30,7 @@ include("connection/config.php");
     <div class="d-flex flex-row" style="margin: 20px 0px 20px 10px;">
         <div class="p-2">
             <div class="row">
-                <div class="feature-title">Search for a book</div>
+                <div class="feature-title">Search for a book reservation</div>
                 <input type="text" class="form-control" id="search" placeholder="Type the book name">
             </div>
 
@@ -44,13 +44,13 @@ include("connection/config.php");
         </div>
     </div>
 
-<!--    <div class="row justify-content-md-center">-->
-<!--        <div class="col-md-12">-->
-<!--            <form method="post" enctype="multipart/form-data">-->
-<!--                <div id="result"></div>-->
-<!--            </form>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="row justify-content-md-center">
+        <div class="col-md-12">
+            <form method="post" enctype="multipart/form-data">
+                <div id="result"></div>
+            </form>
+        </div>
+    </div>
 
 </div>
 
@@ -159,15 +159,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             });
         });
 
-
-        // $("#select").click(function() {
-        //     // $(this).toggleClass("clicked-button");
-        //     $(#btnIcon).toggleClass("fa fa-check");
-        // });
-
-
-
-        //filter available books
+        //filter available books for reservation form
         $("#name").keyup(function () {
             var query = $(this).val();
             if (query != "") {
@@ -186,6 +178,42 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 });
             } else {
                 $('#bookCheck').css('display', 'none');
+            }
+        });
+
+        //get the full table
+        $.ajax({
+            url: 'ajax/get-my-reservations.php',
+            method: 'POST',
+            dataType: "html",
+            data: "query=",
+
+            success: function (data) {
+                $('#result').html(data);
+                $('#result').css('display', 'block');
+                $('#viewTable').css('display', 'none');
+            }
+        });
+
+        // filter table
+        $("#search").keyup(function () {
+            var query = $(this).val();
+            if (query != "") {
+                $.ajax({
+                    url: 'ajax/get-my-reservations.php',
+                    method: 'POST',
+                    data: {
+                        query: query
+                    },
+                    success: function (data) {
+                        $('#result').html(data);
+                        $('#result').css('display', 'block');
+                        $('#viewTable').css('display', 'block');
+
+                    }
+                });
+            } else {
+                $('#result').css('display', 'none');
             }
         });
 

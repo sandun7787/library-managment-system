@@ -136,14 +136,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         echo "<script> alert('failed!');</script>";
                     }
                 } catch (PDOException $th) {
-                    echo $th->getMessage();
+//                    echo $th->getMessage();
                 }
             }
             else{
                 echo "<script> alert('failed!');</script>";
             }
         } catch (PDOException $th) {
-            echo $th->getMessage();
+//            echo $th->getMessage();
+            echo "<script> alert('There are exciting records or reservation for this book! Cant delete the book');</script>";
         }
     }
 }

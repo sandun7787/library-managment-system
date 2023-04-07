@@ -12,29 +12,31 @@ if(isset($_POST['query'])) {
             foreach ($result as $row) {
                 array_push($bookArray,$row[3]);
             }
-            $i = 0;
-            while($i < count($bookArray))
-            {
-                $query = "SELECT `id` FROM `records` WHERE return_date IS NULL AND `book_id`=$bookArray[$i] ";
-                $result = $conn->query($query);
-                $count = $result->rowCount();
-                if($count>0){
-                    unset($bookArray[$i]);
+            try{
+                foreach ($bookArray as $key => $bookId) {
+                    $query = "SELECT `id` FROM `records` WHERE return_date IS NULL AND `book_id`=$bookId ";
+                    $result = $conn->query($query);
+                    $count = $result->rowCount();
+                    if ($count > 0) {
+                        unset($bookArray[$key]);
+                    }
                 }
-                $i++;
+                try{
+                    foreach ($bookArray as $key => $bookId) {
+                        $query = "SELECT `id` FROM `reservation` WHERE  `bookId` =$bookId ";
+                        $result = $conn->query($query);
+                        $count = $result->rowCount();
+                        if ($count > 0) {
+                            unset($bookArray[$key]);
+                        }
+                    }
+                }
+                catch (Exception $ex) {
+                    echo 'Message: ' .$ex->getMessage();
+                }
+            }catch (Exception $ex) {
+                echo 'Message: ' .$ex->getMessage();
             }
-
-//            $z = 0;
-//            while($z < count($bookArray))
-//            {
-//                $query = 'SELECT * FROM `reservation` WHERE  `bookId`="1" ';
-//                $result = $conn->query($query);
-//                $count = $result->rowCount();
-//                if($count>0){
-//                    unset($bookArray[$z]);
-//                }
-//                $z++;
-//            }
 
             if (empty($bookArray)) {
                 echo '
@@ -54,7 +56,15 @@ if(isset($_POST['query'])) {
                 echo ' </tbody>';
                 echo '</table>';
                 echo '</form></div> </div>';
+                echo'<script>
+                      $(document).ready(function() {
+                        // Disable the button
+                        $("#save").prop("disabled", true);
+                      });
+                    </script>';
             } else {
+                $bookArray = array_values($bookArray);
+                $_SESSION['ResBookId'] = $bookArray[0];
                 echo '
             <div class="row justify-content-md-center">
                 <div class="col-md-12"><form method="post">';
@@ -65,22 +75,38 @@ if(isset($_POST['query'])) {
                 echo '<tbody>';
                 echo '<tr class="rw">';
                 echo '<td style="vertical-align: middle;"><img src="'.$row[2].'" width="80" height="90"></td>';
-                echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[1] . '">' . $row[1] . '</td>';
+                echo '<td style="vertical-align: middle;"> <input id="bookName" type="hidden" value="' . $row[1] . '">' . $row[1] . '</td>';
                 echo '<td style="vertical-align: middle;"> <div  style="color:green; font-weight: bold">Available</div></td>';
+                echo'<td style="vertical-align: middle;"><input type="checkbox" id="select">
+                        <label for="checkBox" id="msg">Select</label></td>';
                 echo '</tr>';
                 echo '</tr>';
                 echo ' </tbody>';
                 echo '</table>';
                 echo '</form></div> </div>';
+                echo'<script>
+                      $(document).ready(function() {            
+                         $("#save").prop("disabled", true);
+                         var inputValue = $("#bookName").val();
+                
+                          $("#select").change(function() {
+                            if ($(this).prop("checked")) {
+                                $("#name").val(inputValue).prop("disabled", true)
+                                $("#msg").html("Selected");
+                                $("#save").prop("disabled", false);  
+                            } else {
+                                $("#name").val("").prop("disabled", false);
+                                $("#msg").html("Select");
 
-                echo $row[1];
-                $bookArray[0];
-                $_SESSION['ResBookId']=$bookArray[0];
-
-                print_r($bookArray);
+                            }
+                            });
+                      });
+                      
+                    </script>';
+                echo 'Available book ID(s) - '.implode(", ", $bookArray);
+                $bookArray = null;
             }
         }
-
 }
 
 ?>

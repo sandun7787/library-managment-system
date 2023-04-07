@@ -25,6 +25,10 @@
                 <a href="./login.php" class="nav_link"> <i class='fa fa-sign-in nav_icon'></i> <span class="nav_name">Login</span> </a>
                 <a href="#" class="nav_link"> <i class='fa fa-sign-out nav_icon'></i> <span class="nav_name">Logout</span> </a>
 
+
+                <a href="./my-reservations.php" class="nav_link" style="column-gap:13px"> <i class='fa fa-calendar nav_icon' style="margin-left: 3px"></i> <span class="nav_name">Reservations</span> </a>
+
+
             </div>
         </div>
 
