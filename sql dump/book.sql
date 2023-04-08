@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 06, 2023 at 07:44 PM
+-- Generation Time: Apr 08, 2023 at 12:18 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -35,7 +35,7 @@ CREATE TABLE `book` (
   `price` varchar(10) NOT NULL,
   `year` varchar(4) NOT NULL,
   `pub` varchar(50) NOT NULL,
-  `imgUrl` varchar(200) NOT NULL,
+  `imgUrl` mediumtext NOT NULL,
   `author` varchar(100) NOT NULL,
   `cat` varchar(30) NOT NULL,
   `rack` varchar(10) NOT NULL,

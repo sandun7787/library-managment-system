@@ -18,7 +18,7 @@ interface IBook
     public function bookCount($isbn);
 
     public function getBookIds($isbn);
-    public function filterBook();
+
 
 }
 
