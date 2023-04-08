@@ -4,17 +4,26 @@ session_start();
 interface IBook
 {
     public function addBook(Book $book);
+
     public function getBook($bookId);
+
     public function updateBook(Book $book);
+
     public function deleteBook($bookId);
+
     public function getAllBooks();
 
+    public function getFilteredBooks();
+
     public function bookCount($isbn);
+
     public function getBookIds($isbn);
+    public function filterBook();
 
 }
 
-class BookService implements IBook{
+class BookService implements IBook
+{
 
 
     public function addBook(Book $book)
@@ -22,43 +31,42 @@ class BookService implements IBook{
         try {
             $conn = getCon();
 
-            $isbn=$book->getIsbn();
-            $name=$book->getTitle();
-            $edition=$book->getEdition();
-            $price=$book->getPrice();
-            $year=$book->getYear();
-            $publisher=$book->getPublisher();
-            $imgUrl=$book->getImageUrl();
-            $author=$book->getAuthor();
-            $category=$book->getCategory();
-            $rack=$book->getRack();
-            $shell=$book->getShell();
-            $noc=$book->getNumOfBooks();
+            $isbn = $book->getIsbn();
+            $name = $book->getTitle();
+            $edition = $book->getEdition();
+            $price = $book->getPrice();
+            $year = $book->getYear();
+            $publisher = $book->getPublisher();
+            $imgUrl = $book->getImageUrl();
+            $author = $book->getAuthor();
+            $category = $book->getCategory();
+            $rack = $book->getRack();
+            $shell = $book->getShell();
+            $noc = $book->getNumOfBooks();
 
             $x = 1;
-            while($x <= $noc) {
-            $query = "INSERT INTO `book`(`isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell`)
+            while ($x <= $noc) {
+                $query = "INSERT INTO `book`(`isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell`)
                         VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
-            $st = $conn->prepare($query);
+                $st = $conn->prepare($query);
 
-            $st->bindValue(1, $isbn, PDO::PARAM_STR);
-            $st->bindValue(2, $name, PDO::PARAM_STR);
-            $st->bindValue(3, $edition, PDO::PARAM_STR);
-            $st->bindValue(4, $price, PDO::PARAM_STR);
-            $st->bindValue(5, $year, PDO::PARAM_STR);
-            $st->bindValue(6, $publisher, PDO::PARAM_STR);
-            $st->bindValue(7, $imgUrl, PDO::PARAM_STR);
-            $st->bindValue(8, $author, PDO::PARAM_STR);
-            $st->bindValue(9, $category, PDO::PARAM_STR);
-            $st->bindValue(10, $rack, PDO::PARAM_STR);
-            $st->bindValue(11, $shell, PDO::PARAM_STR);
-            $st->execute();
+                $st->bindValue(1, $isbn, PDO::PARAM_STR);
+                $st->bindValue(2, $name, PDO::PARAM_STR);
+                $st->bindValue(3, $edition, PDO::PARAM_STR);
+                $st->bindValue(4, $price, PDO::PARAM_STR);
+                $st->bindValue(5, $year, PDO::PARAM_STR);
+                $st->bindValue(6, $publisher, PDO::PARAM_STR);
+                $st->bindValue(7, $imgUrl, PDO::PARAM_STR);
+                $st->bindValue(8, $author, PDO::PARAM_STR);
+                $st->bindValue(9, $category, PDO::PARAM_STR);
+                $st->bindValue(10, $rack, PDO::PARAM_STR);
+                $st->bindValue(11, $shell, PDO::PARAM_STR);
+                $st->execute();
                 $x++;
             }
             return 1;
-        }
-        catch(SQLiteException $ex){
+        } catch (SQLiteException $ex) {
             return 0;
         }
     }
@@ -69,7 +77,6 @@ class BookService implements IBook{
         $query = "SELECT `isbn`, `name`, `edition`, `price`, `year`, `pub`, `imgUrl`, `author`, `cat`, `rack`, `shell`,`bookId` FROM `book` WHERE `bookId` =$bookId ";
         $result = $conn->query($query);
         return $result;
-        // TODO: Implement getBook() method.
     }
 
     public function updateBook(Book $book)
@@ -77,18 +84,18 @@ class BookService implements IBook{
         try {
             $conn = getCon();
 
-            $bookId=$book->getBookId();
-            $isbn=$book->getIsbn();
-            $name=$book->getTitle();
-            $edition=$book->getEdition();
-            $price=$book->getPrice();
-            $year=$book->getYear();
-            $publisher=$book->getPublisher();
-            $imgUrl=$book->getImageUrl();
-            $author=$book->getAuthor();
-            $category=$book->getCategory();
-            $rack=$book->getRack();
-            $shell=$book->getShell();
+            $bookId = $book->getBookId();
+            $isbn = $book->getIsbn();
+            $name = $book->getTitle();
+            $edition = $book->getEdition();
+            $price = $book->getPrice();
+            $year = $book->getYear();
+            $publisher = $book->getPublisher();
+            $imgUrl = $book->getImageUrl();
+            $author = $book->getAuthor();
+            $category = $book->getCategory();
+            $rack = $book->getRack();
+            $shell = $book->getShell();
 
 
             $query = "UPDATE `book` SET `name`=?,`edition`=?,`price`=?,`year`=?,`pub`=?,`imgUrl`=?,`author`=?,`cat`=?,`rack`=?,`shell`=? WHERE `isbn` = $isbn";
@@ -110,7 +117,6 @@ class BookService implements IBook{
         } catch (SQLiteException $ex) {
             return 0;
         }
-        // TODO: Implement updateBook() method.
     }
 
     public function deleteBook($bookId)
@@ -118,24 +124,27 @@ class BookService implements IBook{
         try {
             $conn = getCon();
             $query = "DELETE FROM `book` WHERE `bookId` =$bookId";
-            $st= $conn->query($query);
+            $st = $conn->query($query);
             $st->execute();
             return 1;
-        }
-        catch(SQLiteException $ex){
+        } catch (SQLiteException $ex) {
             return 0;
         }
-
-        // TODO: Implement deleteBook() method.
     }
 
     public function getAllBooks()
     {
-        $conn=getCon();
-        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`, `bookId` FROM `book`";
-        $result = $conn->query($query);
-        return $result;
-         // TODO: Implement getAllBooks() method.
+        $conn = getCon();
+        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`,`edition`, `price`, `year`, `pub`,  `rack`, `shell`,`bookid` FROM `book`";
+        return $conn->query($query);
+    }
+
+    public function getFilteredBooks()
+    {
+        $conn = getCon();
+        $query = "SELECT `imgUrl`, `name`, `isbn`, `author`, `cat`,`edition`, `price`, `year`, `pub`,  `rack`, `shell`,`bookid` 
+                    FROM `book` WHERE name LIKE '{$_POST['query']}%' LIMIT 100";
+        return $conn->query($query);
     }
 
     public function bookCount($isbn)
@@ -146,7 +155,6 @@ class BookService implements IBook{
         $result = $conn->query($query);
         $count = $result->rowCount();
         return $count;
-        // TODO: Implement bookCount() method.
     }
 
     public function getBookIds($isbn)
@@ -157,9 +165,8 @@ class BookService implements IBook{
         $result = $conn->query($query);
         $ids = array();
         foreach ($result as $row) {
-            array_push($ids,$row[2]);
+            array_push($ids, $row[2]);
         }
         return $ids;
-        // TODO: Implement bookCount() method.
     }
 }

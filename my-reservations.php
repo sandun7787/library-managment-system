@@ -96,10 +96,13 @@ include("connection/config.php");
 
 <?php
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include 'model/Reservation.php';
+    include 'repository/ReservationService.php';
+    $res = new Reservation();
+    $resS = new ReservationService();
+
     if (isset($_POST['save'])) {
         try {
-            include 'model/Reservation.php';
-            $res = new Reservation();
             $bookId = $res->setBookId($_SESSION['ResBookId']);
             $userId = $res->setUserId("9563");
             $resDate = $res->setReservationDate(date("Y-m-d") );
@@ -108,10 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //Write to db
             try {
-                include 'repository/ReservationService.php';
-                $resS = new ReservationService();
                 $check = $resS->addReservation($res);
-
                 if ($check == 1) {
                     echo "<script>";
                     echo "$(document).ready(function() {";
@@ -135,9 +135,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }
 
-    if (isset($_POST["viewBook"])) {
-        $_SESSION["bookId"] =$_POST["viewBook"];
-        echo '<script>window.location.href = "book-info.php";</script>';
+    if (isset($_POST["delRes"])) {
+
+        try {
+            $delete=$resS->deleteReservation($_POST["delRes"]);
+            if ($delete == 1) {
+                echo "<script>";
+                echo "$(document).ready(function() {";
+                echo "Swal.fire({";
+                echo " icon: 'success',";
+                echo "text: 'Reservation deleted successfully!',";
+                echo "}).then((result) => {";
+                echo "});";
+                echo "});";
+                echo "</script>";
+            } else {
+                echo "<script> alert('failed!');</script>";
+            }
+        } catch (PDOException $th) {
+//            echo $th->getMessage();
+        }
     }
 }
 ?>

@@ -115,31 +115,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['delete'])) {
-
         try {
-            $delete=$bookS->deleteBook($id);
-            if ($delete==1){
-                try {
-                    $delete = $bookS->deleteBook($id);
-                    if ($delete == 1) {
-                        echo "<script>";
-                        echo "$(document).ready(function() {";
-                        echo "Swal.fire({";
-                        echo " icon: 'success',";
-                        echo "text: 'Book deleted successfully!',";
-                        echo "}).then((result) => {";
-                        echo "window.location.href = 'book.php'";
-                        echo "});";
-                        echo "});";
-                        echo "</script>";
-                    } else {
-                        echo "<script> alert('failed!');</script>";
-                    }
-                } catch (PDOException $th) {
-//                    echo $th->getMessage();
-                }
-            }
-            else{
+        $delete = $bookS->deleteBook($id);
+            if ($delete == 1) {
+                echo "<script>";
+                echo "$(document).ready(function() {";
+                echo "Swal.fire({";
+                echo " icon: 'success',";
+                echo "text: 'Book deleted successfully!',";
+                echo "}).then((result) => {";
+                echo "window.location.href = 'book.php'";
+                echo "});";
+                echo "});";
+                echo "</script>";
+            } else {
                 echo "<script> alert('failed!');</script>";
             }
         } catch (PDOException $th) {
