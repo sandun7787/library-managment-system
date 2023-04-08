@@ -8,6 +8,7 @@ class Member
     private $no;
     private $state;
     private $password;
+    private $imgUrl;
 
     public function __construct()
     {
@@ -21,7 +22,7 @@ class Member
      * @param $state
      * @param $password
      */
-    public function __construct_1($memberId, $name, $email, $no, $state, $password)
+    public function __construct_1($memberId, $name, $email, $no, $state, $password,$imgUrl)
     {
         $this->memberId = $memberId;
         $this->name = $name;
@@ -29,6 +30,7 @@ class Member
         $this->no = $no;
         $this->state = $state;
         $this->password = $password;
+        $this->imgUrl = $imgUrl;
     }
 
     /**
@@ -125,6 +127,22 @@ class Member
     public function setPassword($password): void
     {
         $this->password = $password;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getImgUrl()
+    {
+        return $this->imgUrl;
+    }
+
+    /**
+     * @param mixed $imgUrl
+     */
+    public function setImgUrl($imgUrl): void
+    {
+        $this->imgUrl = $imgUrl;
     }
 
 
