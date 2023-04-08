@@ -5,10 +5,12 @@ interface IMember
 {
     public function addDetails(Member $member);
     public function getMember($member);
-    public function updateMember(Memeber $member);
+    public function updateMember(Member $member);
     public function ChangeStatus($memberId,$state);
     public function getAllMember();
     public function getFilteredMembers();
+    public function memberLogin($id,$password);
+    public function adminLogin($id,$password);
 
 }
 
@@ -47,16 +49,12 @@ class MemberService implements IMember{
         }
     }
 
-
-
-
-
     public function getMember($member)
     {
         // TODO: Implement getMember() method.
     }
 
-    public function updateMember(Memeber $member)
+    public function updateMember(Member $member)
     {
         // TODO: Implement updateMember() method.
     }
@@ -91,4 +89,66 @@ class MemberService implements IMember{
         $query = "SELECT `id`, `name`, `email`, `no`, `state`, `password`, `imgUrl` FROM `member` WHERE name LIKE '{$_POST['query']}%' LIMIT 100";
         return $conn->query($query);
     }
+
+
+    public function memberLogin($id,$password){
+        
+        try {
+        
+            $conn=getCon();
+        
+            $query="SELECT  `name`,`id` FROM `member` WHERE `password`=? and `id`=?";
+            
+            $st=$conn->prepare($query);
+            $st->bindValue(1,$password,PDO::PARAM_STR);
+            $st->bindValue(2,$id,PDO::PARAM_STR);
+            $st->execute();
+            $result=$st->fetch();
+    
+            if($result[1]== $_POST["memberID"])
+        {
+        
+        $_SESSION["memberID"] =$result[0];
+        echo '<script> alert("Member login successful");</script>';
+        echo '<script>window.location.href = "dashboard.php";</script>';
+                }
+        
+        }
+            catch(Exception $e)
+            {
+            echo'<script> alert( '. $e->getMessage().')</script>';
+            }
+
+    }
+
+    public function adminLogin($id,$password){
+
+        try {
+        
+            $conn=getCon();
+        
+            $query="SELECT `id` FROM `admin` WHERE `password`=? and `id`=?";
+            
+            $st=$conn->prepare($query);
+            $st->bindValue(1,$password,PDO::PARAM_STR);
+            $st->bindValue(2,$id,PDO::PARAM_STR);
+            $st->execute();
+            $result=$st->fetch();
+    
+            if($result[0]== $_POST["adminID"])
+        {
+        
+        $_SESSION["adminID"] =$result[0];
+        echo '<script> alert(" Admin login successful");</script>';
+        echo '<script>window.location.href = "dashboard.php";</script>';
+                }
+        
+        }
+            catch(Exception $e)
+            {
+            echo'<script> alert( '. $e->getMessage().')</script>';
+            }
+
+    }
+
 }
