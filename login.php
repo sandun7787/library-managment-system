@@ -30,7 +30,7 @@
     <div class="login-container">
         <div class="row">
             <div class="col-md-6 login-form-1">
-                <h3>Student Login</h3>
+                <h3>Member Login</h3>
                 <form>
                     <div class="form-group">
                         <input type="text" class="form-control" placeholder="Your Email *" value="" />
