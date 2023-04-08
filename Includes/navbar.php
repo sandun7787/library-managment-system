@@ -18,7 +18,7 @@
 <!--                <a href="./dashboard.php" class="nav_link active"> <i class='fa fa-home nav_icon'></i><span class="nav_name">Dashboard</span> </a>-->
                 <a href="./dashboard.php" class="nav_link"> <i class='fa fa-home nav_icon'></i><span class="nav_name">Dashboard</span> </a>
                 <a href="./book.php" class="nav_link" > <i class='fa fa-book nav_icon'></i> <span class="nav_name">Books</span> </a>
-                <a href="#" class="nav_link" style="column-gap:20px"> <i class='fa fa-user nav_icon'></i> <span class="nav_name">Users</span> </a>
+                <a href="./member.php" class="nav_link" style="column-gap:20px"> <i class='fa fa-user nav_icon'></i> <span class="nav_name">Users</span> </a>
                 <a href="./records.php" class="nav_link"> <i class='fa fa-edit nav_icon'></i> <span class="nav_name">Records</span> </a>
                 <a href="./penalty.php" class="nav_link" style="column-gap:20px"> <i class='fa fa-usd nav_icon' style="margin-left: 3px"></i> <span class="nav_name">Penalty</span> </a>
                 <a href="./reservations.php" class="nav_link" style="column-gap:13px"> <i class='fa fa-calendar nav_icon' style="margin-left: 3px"></i> <span class="nav_name">Reservations</span> </a>
