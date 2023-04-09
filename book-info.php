@@ -1,7 +1,6 @@
 <?php
 error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 session_start();
-require("login-check/login-check-a.php");
 include("connection/config.php");
 ?>
 <!DOCTYPE html>
@@ -64,7 +63,6 @@ try{
     echo $th->getMessage();
 }
 
-
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['save'])) {
         try {
@@ -75,7 +73,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $price=$book->setPrice($_POST['price']);
             $year=$book->setYear($_POST['year']);
             $publisher=$book->setPublisher($_POST['publisher']);
-            $imgUrl=$book->setImageUrl($_POST['imgUrl']);
+            $imgUrl=$book->setImageUrl($_POST['imageUrl']);
             $author=$book->setAuthor($_POST['author']);
             $category=$book->setCategory($_POST['category']);
             $rack=$book->setRack($_POST['rack']);
@@ -117,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['delete'])) {
         try {
-        $delete = $bookS->deleteBook($id);
+            $delete = $bookS->deleteBook($id);
             if ($delete == 1) {
                 echo "<script>";
                 echo "$(document).ready(function() {";
@@ -146,9 +144,10 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 
     <div class="row">
         <div class="col-md-4" style="margin: auto">
-<!--            <img src="https://via.placeholder.com/200x300" alt="Book Cover" class="img-fluid book-cover">-->
-            <img src="<?php echo $imageUrl;?>" alt="Book Cover" class="img-fluid book-cover">
-        </div>
+            <!--            <img src="https://via.placeholder.com/200x300" alt="Book Cover" class="img-fluid book-cover">-->
+            <div id="image-card">
+                <img src="<?php echo $imageUrl;?>" alt="Book Cover" class="img-fluid book-cover">
+            </div> </div>
         <div class="col-md-8">
             <h1 class="mb-4">Book Details</h1>
             <form method="post" enctype="multipart/form-data" action="" class="book-form">
@@ -236,10 +235,11 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
                         <input type="text" class="form-control" id="shelf-number" name="shell" value="<?php echo $shell;?>" disabled>
                     </div>
                 </div>
+
                 <div class="row mb-3">
                     <label for="shelf-number" class="col-sm-3 col-form-label">Image URL</label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control" id="url" name="imgUrl" value="<?php echo $imageUrl;?>" disabled>
+                        <input type="text" id="image-link"  name ="imageUrl" class="form-control"value="<?php echo $imageUrl;?>"  disabled>
                     </div>
                 </div>
                 <div class="row mb-3">
@@ -254,7 +254,6 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
                         <input type="number" class="form-control" id="newNoc" name="newNoc" min="0" value="0" disabled>
                     </div>
                 </div>
-
                 <div class="row">
                     <div class="col-md-12">
                         <button type="button" class="btn btn-primary" id="edit-btn">Update Book</button>
@@ -282,7 +281,21 @@ error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
             $('#save-btn').removeClass('d-none');
             $('#newCopies').prop('hidden',false);
         });
+        $(document).ready(function() {
+            const $imageLinkInput = $('#image-link');
+            const $imageCard = $('#image-card');
+
+            $imageLinkInput.on('input', function() {
+                const imageUrl = $imageLinkInput.val();
+                $imageCard.html(`<img src="${imageUrl}" alt="Updated Image"  class="img-fluid book-cover">`);
+            });
+        });
     });
+
+
+
 </script>
+
+
 </body>
 </html>
