@@ -1,21 +1,26 @@
 <?php
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 session_start();
 if(isset($_POST['query'])) {
-        include '../connection/config.php';
-        $conn = getCon();
-        $query="SELECT `isbn`, `name`,`imgUrl`, `bookId` FROM `book` WHERE `name`LIKE '{$_POST['query']}%' LIMIT 100";
-        $result = $conn->query($query);
+    include '../connection/config.php';
+    include '../repository/BookService.php';
+    include '../repository/ReservationService.php';
+    include '../repository/RecordService.php';
+    $bookService = new BookService();
+    $recordService = new RecordService();
+    $resService = new ReservationService();
+    $conn = getCon();
+    $result = $bookService->getFilteredBooks();
         $count = $result->rowCount();
         $bookArray=array();
 
         if($count>0){
             foreach ($result as $row) {
-                array_push($bookArray,$row[3]);
+                array_push($bookArray,$row[11]);
             }
             try{
                 foreach ($bookArray as $key => $bookId) {
-                    $query = "SELECT `id` FROM `records` WHERE return_date IS NULL AND `book_id`=$bookId ";
-                    $result = $conn->query($query);
+                    $result = $recordService->getRecordsToArray($bookId);
                     $count = $result->rowCount();
                     if ($count > 0) {
                         unset($bookArray[$key]);
@@ -23,8 +28,7 @@ if(isset($_POST['query'])) {
                 }
                 try{
                     foreach ($bookArray as $key => $bookId) {
-                        $query = "SELECT `id` FROM `reservation` WHERE  `bookId` =$bookId ";
-                        $result = $conn->query($query);
+                        $result = $resService->getReservationsToArray($bookId);
                         $count = $result->rowCount();
                         if ($count > 0) {
                             unset($bookArray[$key]);
@@ -48,7 +52,7 @@ if(isset($_POST['query'])) {
                 echo '</thead>';
                 echo '<tbody>';
                 echo '<tr class="rw">';
-                echo '<td style="vertical-align: middle;"><img src="'.$row[2].'" width="80" height="90"></td>';
+                echo '<td style="vertical-align: middle;"><img src="'.$row[0].'" width="80" height="90"></td>';
                 echo '<td style="vertical-align: middle;"> <input type="hidden" value="' . $row[1] . '">' . $row[1] . '</td>';
                 echo '<td style="vertical-align: middle;"> <div  style="color:red; font-weight: bold">No available books</div></td>';
                 echo '</tr>';
@@ -74,7 +78,7 @@ if(isset($_POST['query'])) {
                 echo '</thead>';
                 echo '<tbody>';
                 echo '<tr class="rw">';
-                echo '<td style="vertical-align: middle;"><img src="'.$row[2].'" width="80" height="90"></td>';
+                echo '<td style="vertical-align: middle;"><img src="'.$row[0].'" width="80" height="90"></td>';
                 echo '<td style="vertical-align: middle;"> <input id="bookName" type="hidden" value="' . $row[1] . '">' . $row[1] . '</td>';
                 echo '<td style="vertical-align: middle;"> <div  style="color:green; font-weight: bold">Available</div></td>';
                 echo'<td style="vertical-align: middle;"><input type="checkbox" id="select">

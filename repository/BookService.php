@@ -4,20 +4,15 @@ session_start();
 interface IBook
 {
     public function addBook(Book $book);
-
     public function getBook($bookId);
-
     public function updateBook(Book $book);
-
     public function deleteBook($bookId);
-
     public function getAllBooks();
-
     public function getFilteredBooks();
-
     public function bookCount($isbn);
-
     public function getBookIds($isbn);
+    public function checkBook();
+    public function checkIsbn();
 
 
 }
@@ -168,5 +163,19 @@ class BookService implements IBook
             array_push($ids, $row[2]);
         }
         return $ids;
+    }
+
+    public function checkBook()
+    {
+        $conn = getCon();
+        $query = "SELECT `name` FROM book WHERE bookId='{$_POST['query']}%'";
+        return $conn->query($query);
+    }
+
+    public function checkIsbn()
+    {
+        $conn = getCon();
+        $query = "SELECT `name` FROM book WHERE isbn='" . $_POST["isbn"] . "'";
+        return $conn->query($query);
     }
 }

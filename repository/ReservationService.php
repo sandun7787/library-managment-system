@@ -4,20 +4,15 @@ session_start();
 interface IReservation
 {
     public function addReservation(Reservation $reservation);
-
     public function changeReservationState($reservationId, $state);
-
     public function getReservationSet();
-
     public function getFilteredReservationSet();
-
     public function getOldReservationSet();
-
     public function getFilteredOldReservationSet();
     public function getMyReservations();
     public function getFilteredMyReservations();
-
     public function deleteReservation($reservationId);
+    public function getReservationsToArray($id);
 
 }
 
@@ -175,4 +170,11 @@ class ReservationService implements IReservation
         } catch (SQLiteException $ex) {
             return 0;
         }    }
+
+    public function getReservationsToArray($id)
+    {
+        $conn = getCon();
+        $query =  "SELECT `id` FROM `reservation` WHERE  `bookId` =$id ";
+        return $conn->query($query);
+    }
 }

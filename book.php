@@ -66,8 +66,8 @@ include("connection/config.php");
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="book" class="control-label">ISBN No</label>
-                        <input type="text" name="isbn" id="isbn" autocomplete="off" class="form-control"
-                               placeholder="isbn name" oninput="checkIsbn()" required/>
+                        <input type="text" name="isbn" id="isbn" oninput="checkIsbn()" autocomplete="off" class="form-control"
+                               placeholder="isbn name" required/>
                         <span id="check-isbn"></span>
 
                     </div>
@@ -270,7 +270,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     });
 
-        function checkIsbn() {
+    function checkIsbn() {
         $.ajax({
             url: "ajax/check-isbn.php",
             data: 'isbn=' + $("#isbn").val(),

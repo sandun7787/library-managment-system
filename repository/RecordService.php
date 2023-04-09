@@ -15,6 +15,7 @@ interface IRecord
     public function getFilteredPenaltyDetails();
     public function getOldPenaltyRecords();
     public function getFilteredOldPenaltyRecords();
+    public function getRecordsToArray($id);
 
 
 }
@@ -148,7 +149,8 @@ class RecordService Implements IRecord {
         $conn = getCon();
         $query = "SELECT `id`, `book_id`, `borrower_id`, `borrow_date`, `due_date`, `return_date`, `penalty`
                     FROM `records` WHERE  penalty IS NOT NULL AND NOW() > due_date ORDER BY due_date ASC ";
-        return $conn->query($query);    }
+        return $conn->query($query);
+    }
 
     public function getFilteredOldPenaltyRecords()
     {
@@ -157,4 +159,11 @@ class RecordService Implements IRecord {
                     FROM `records` WHERE  penalty IS NOT NULL AND NOW() > due_date 
                     AND borrower_id LIKE '{$_POST['query']}%' LIMIT 100";
         return $conn->query($query);    }
+
+    public function getRecordsToArray($id)
+    {
+        $conn = getCon();
+        $query = "SELECT `id` FROM `records` WHERE return_date IS NULL AND `book_id`=$id ";
+        return $conn->query($query);
+    }
 }

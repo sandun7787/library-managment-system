@@ -11,6 +11,7 @@ interface IMember
     public function getFilteredMembers();
     public function memberLogin($id,$password);
     public function adminLogin($id,$password);
+    public function checkMember();
 
 }
 
@@ -151,4 +152,10 @@ class MemberService implements IMember{
 
     }
 
+    public function checkMember()
+    {
+        $conn = getCon();
+        $query = "SELECT `name` FROM member WHERE id='{$_POST['query']}%'";
+        return $conn->query($query);
+    }
 }

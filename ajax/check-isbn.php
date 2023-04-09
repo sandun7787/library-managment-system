@@ -1,8 +1,9 @@
 <?php
 include '../connection/config.php';
 $conn = getCon();
-    $query = "SELECT `name` FROM book WHERE isbn='" . $_POST["isbn"] . "'";
-    $result = $conn->query($query);
+include '../repository/BookService.php';
+    $bookService = new BookService();
+    $result = $bookService->checkIsbn();
     $count = $result->rowCount();
     if($count>0) {
             echo'<div style="margin-top: 10px">';

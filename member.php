@@ -65,7 +65,7 @@ include("connection/config.php");
                     <div class="form-group">
                         <label for="member" class="control-label">Member Id</label>
                         <input type="text" name="memberId" id="memberId" autocomplete="off" class="form-control"
-                               placeholder="MemberID" oninput="checkMemberId()" required/>
+                               placeholder="MemberID" required/>
                         <span id="check-member"></span>
                     </div>
                     <div class="form-group">
@@ -239,18 +239,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             window.location.reload();
         });
 
-    });
+        //check user id
+        $("#memberId").keyup(function () {
+            var query = $(this).val();
+            if (query != "") {
+                $.ajax({
+                    url: 'ajax/check-member.php',
+                    method: 'POST',
+                    data: {
+                        query: query
+                    },
+                    success: function (data) {
+                        $("#check-member").html(data);
 
-        function checkMemberId() {
-        $.ajax({
-            url: "ajax/check-member.php",
-            data: 'memberId=' + $("#memberId").val(),
-            type: "POST",
-            success: function (data) {
-                $("#check-member").html(data);
+                    }
+                });
             }
         });
-    }
+
+    });
+
+
 </script>
 </body>
 </html>

@@ -70,13 +70,13 @@ include("connection/config.php");
                     <div class="form-group">
                         <label for="book" class="control-label">Book ID</label>
                         <input type="text" name="bookId" id="bookId" autocomplete="off" class="form-control"
-                               placeholder="book id" oninput="getBook()" required/>
+                               placeholder="book id"  required/>
                         <span id="get-book"></span>
                     </div>
                     <div class="form-group">
                         <label for="book" class="control-label">Member ID</label>
                         <input type="text" name="memberId" id="memberId" autocomplete="off" class="form-control"
-                               placeholder="book name" oninput="getMember()" required/>
+                               placeholder="book name"  required/>
                         <span id="get-member"></span>
                     </div>
                     <div class="form-group">
@@ -237,29 +237,41 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             window.location.reload();
         });
 
+        //check book isbn
+        $("#bookId").keyup(function () {
+            var query = $(this).val();
+            if (query != "") {
+                $.ajax({
+                    url: 'ajax/get-book.php',
+                    method: 'POST',
+                    data: {
+                        query: query
+                    },
+                    success: function (data) {
+                        $("#get-book").html(data);
+
+                    }
+                });
+            }
+        });
+
+        //check member id
+        $("#memberId").keyup(function () {
+            var query = $(this).val();
+            if (query != "") {
+                $.ajax({
+                    url: 'ajax/get-member.php',
+                    method: 'POST',
+                    data: {
+                        query: query
+                    },
+                    success: function (data) {
+                        $("#get-member").html(data);
+                    }
+                });
+            }
+        });
     });
-
-    function getBook() {
-        $.ajax({
-            url: "ajax/get-book.php",
-            data: 'bookId=' + $("#bookId").val(),
-            type: "POST",
-            success: function (data) {
-                $("#get-book").html(data);
-            }
-        });
-    }
-
-    function getMember() {
-        $.ajax({
-            url: "ajax/get-member.php",
-            data: 'memberId=' + $("#memberId").val(),
-            type: "POST",
-            success: function (data) {
-                $("#get-member").html(data);
-            }
-        });
-    }
 </script>
 </body>
 </html>
