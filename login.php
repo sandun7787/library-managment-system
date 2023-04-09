@@ -70,66 +70,102 @@ session_start();
 
 
 <?php
+include 'repository/MemberService.php';
+$memberService = new MemberService();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-//member login
-
-
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if (isset($_POST["btnSubmit"])) {
-                        try {
-                            $id =$_POST["memberID"];
-                            $password = md5($_POST["memberPW"]);
-                            include 'repository/MemberService.php';
-                            $loginM = new MemberService();
-                            $result=$loginM->memberLogin($id, $password);
-
-                            if ($result[0] == $_POST["memberID"]) {
-                                $_SESSION["m_id"] = $result[0];
-                             
-                                echo '<script>window.location.href = "book.php";</script>';
-                            } else {
-                                echo '<script>alert("Incorrect user ID or password")</script>';
-                            }
-                        } catch (PDOException $th) {
-                            echo $th->getMessage();
-                        }
-                    }
+    //member login
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST["btnSubmit"])) {
+            try {
+                $id =$_POST["memberID"];
+                $password = md5($_POST["memberPW"]);
+                $result=$memberService->memberLogin($id, $password);
+                if ($result[0]== $_POST["memberID"]) {
+                    $_SESSION["M_ID"] =$result[0];
+                    echo "<script>";
+                    echo "$(document).ready(function() {";
+                    echo "Swal.fire({";
+                    echo " icon: 'success',";
+                    echo "text: 'Login successfully!',";
+                    echo "}).then((result) => {";
+                    echo "window.location.href = 'dashboard.php'";
+                    echo "});";
+                    echo "});";
+                    echo "</script>";
+                } else {
+                    echo "<script>";
+                    echo "$(document).ready(function() {";
+                    echo "Swal.fire({";
+                    echo " icon: 'warning',";
+                    echo "text: 'Incorrect user name or password',";
+                    echo "}).then((result) => {";
+                    echo "});";
+                    echo "});";
+                    echo "</script>";
                 }
-                error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+            } catch (PDOException $th) {
+                echo $th->getMessage();
+            }
+        }
+    }
 
-                // admin login
-
-
-                if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                    if (isset($_POST["btnAdmSubmit"])) {
-                        try {
-                            $id =$_POST["adminID"];
-                            $password = md5($_POST["adminPW"]);
-                            include 'repository/MemberService.php';
-                            $loginM = new MemberService();
-                            $result=$loginM->adminLogin($id, $password);
-
-                            if ($result[0] == $_POST["adminID"]) {
-                                $_SESSION["a_id"] = $result[0];
-                             
-                                echo '<script>window.location.href = "book.php";</script>';
-                            } else {
-                                echo '<script>alert("Incorrect user ID or password")</script>';
-                            }
-                        } catch (PDOException $th) {
-                            echo $th->getMessage();
-                        }
-                    }
+    // admin login
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if (isset($_POST["btnAdmSubmit"])) {
+            try {
+                $id =$_POST["adminID"];
+                $password = md5($_POST["adminPW"]);
+                $result=$memberService->adminLogin($id, $password);
+                if ($result[0] == $_POST["adminID"]) {
+                    $_SESSION["A_ID"] = $result[0];
+                    echo "<script>";
+                    echo "$(document).ready(function() {";
+                    echo "Swal.fire({";
+                    echo " icon: 'success',";
+                    echo "text: 'Login successfully!',";
+                    echo "}).then((result) => {";
+                    echo "window.location.href = 'dashboard.php'";
+                    echo "});";
+                    echo "});";
+                    echo "</script>";
+                } else {
+                    echo "<script>";
+                    echo "$(document).ready(function() {";
+                    echo "Swal.fire({";
+                    echo " icon: 'warning',";
+                    echo "text: 'Incorrect user name or password',";
+                    echo "}).then((result) => {";
+                    echo "});";
+                    echo "});";
+                    echo "</script>";
                 }
-                error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+            } catch (PDOException $th) {
+                echo $th->getMessage();
+            }
+        }
+    }
+    error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+}
 
-
-
-                ?>
+if (isset($_SESSION["M_ID"])) {
+    $result = $memberService->getMember($_SESSION["M_ID"]);
+    foreach ($result as $row) {
+        $_SESSION["nav_Name"]=$row[1];
+        $_SESSION["nav_Img"]=$row[6];
+    }
+}
+else {
+    $_SESSION["nav_Name"]="Admin";
+    $_SESSION["nav_Img"]="https://cdn3.iconfinder.com/data/icons/user-group-black/100/user-process-512.png";
+}
+?>
 
 
 
 <!--Container Main end-->
 <script src="js/navbar.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 </body>
 </html>

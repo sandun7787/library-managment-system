@@ -1,3 +1,7 @@
+<?php
+session_start();
+include("connection/config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +24,48 @@
 <!--Container Main start-->
 <div class="main container">
     <h4>Main Components</h4>
+
+    <form method="post">
+        <input type="submit" name="click">
+
+    </form>
 </div>
+<!--<input type="hidden" id="loginStatus" value="--><?php //if(isset($_SESSION["M_ID"]) || isset($_SESSION["A_ID"])){echo "true";}?><!--">-->
+
 <!--Container Main end-->
 <script src="js/navbar.js"></script>
 </body>
 </html>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST['click'])) {
+        if (isset($_SESSION["A_ID"])) {
+            echo $_SESSION["A_ID"];
+        }else{
+            echo "no a";
+        }
+        if (isset($_SESSION["M_ID"])) {
+            echo $_SESSION["M_ID"];
+        }
+        else{
+            echo "no m";
+        }
+    }
+}
+//if (isset($_SESSION["M_ID"]) || isset($_SESSION["A_ID"])) {
+//    echo "<script>";
+//    echo "$(document).ready(function() {";
+//    echo "Swal.fire({";
+//    echo " icon: 'success',";
+//    echo "text: 'Login successfully!',";
+//    echo "}).then((result) => {";
+////    echo "window.location.href = 'dashboard.php'";
+//    echo "});";
+//    echo "});";
+//    echo "</script>";
+//
+//}
+
+
+error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
+?>

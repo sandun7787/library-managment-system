@@ -1,7 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 session_start();
-//require("login-check/logincheck_D.php");
+require("login-check/login-check-m.php");
 include("connection/config.php");
 ?>
 <!DOCTYPE html>
@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['save'])) {
         try {
             $bookId = $res->setBookId($_SESSION['ResBookId']);
-            $userId = $res->setUserId("9563");
+            $userId = $res->setUserId($_SESSION["M_ID"]);
             $resDate = $res->setReservationDate(date("Y-m-d") );
             $reqDate = $res->setRequestedDate($_POST["reqDate"]);
 

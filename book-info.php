@@ -1,6 +1,7 @@
 <?php
 error_reporting(E_ALL & ~E_WARNING & ~E_NOTICE);
 session_start();
+require("login-check/login-check-a.php");
 include("connection/config.php");
 ?>
 <!DOCTYPE html>

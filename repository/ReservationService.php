@@ -125,11 +125,12 @@ class ReservationService implements IReservation
 
     public function getMyReservations()
     {
+        $id =$_SESSION["M_ID"];
         $conn = getCon();
         $query ="SELECT book.name, reservation.id, reservation.date, reservation.reqDate, reservation.state
                     FROM reservation 
                     JOIN book ON book.bookId = reservation.bookId 
-                    WHERE reservation.userId = '9563' 
+                    WHERE reservation.userId = $id
                     ORDER BY 
                       CASE reservation.state 
                         WHEN 'pending' THEN 1 
@@ -143,11 +144,12 @@ class ReservationService implements IReservation
 
     public function getFilteredMyReservations()
     {
+        $id =$_SESSION["M_ID"];
         $conn = getCon();
         $query ="SELECT book.name, reservation.id, reservation.date, reservation.reqDate, reservation.state
                     FROM reservation 
                     JOIN book ON book.bookId = reservation.bookId 
-                    WHERE reservation.userId = '9563' AND book.name LIKE '{$_POST['query']}%'
+                    WHERE reservation.userId = $id AND book.name LIKE '{$_POST['query']}%'
                     ORDER BY 
                       CASE reservation.state 
                         WHEN 'pending' THEN 1 
